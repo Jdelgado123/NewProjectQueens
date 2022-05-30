@@ -10,7 +10,7 @@ const Home = ({products}) => {
 }
 
 export const getServerSideProps = async(context) =>{
-  const {data:products} =await axios.get('http://192.168.100.3:3000/api/products')
+  const {data:products} =await axios.get('http://localhost:3000/api/products')
   
   return{
     props:{

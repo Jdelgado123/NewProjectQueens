@@ -1,4 +1,17 @@
 import { db } from "../../../config/db"
+import multer from "multer"
+import path from 'path'
+
+const diskStorage = multer.diskStorage({
+    destination:path.join(__dirname,'../../../../imagesServers'),
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+"-"+file.originalname)
+    }
+})
+
+const fileUpload = multer({
+    storage:diskStorage
+})
 
 export default async function handlerPostProduct(req,res) {
     
@@ -7,19 +20,19 @@ export default async function handlerPostProduct(req,res) {
             return await getProducts(req,res)
     
         case 'POST':
-            return await saveProduct(req,res)
+            return saveProduct(req,res)
     }
 }
 
-const getProducts = async(req,res)=>{
+const getProducts = async(req,res)=> {
     const [result]=await db.query("SELECT * FROM products")
 
     return res.status(200).json(result)
 }
 
-const saveProduct = async(req,res)=>{
-    const {name,description,price,stock,img} = req.body
-
+const saveProduct = fileUpload.single('imagen') = async(req,res)=>{
+    const {name,description,price,stock} = req.body
+    console.log(req.file)
     const [result] = await db.query("INSERT INTO products set ?",{
         name,
         description,
@@ -27,6 +40,5 @@ const saveProduct = async(req,res)=>{
         stock,
         img
     })
-    console.log(result)
     return res.status(200).json('creating Product')
-}
+};

@@ -9,12 +9,29 @@ const Formproduct = () => {
     description:"",
     price:0,
     stock:0,
-    img:""
   })
+
+  const [stateImage,setStateImage]=useState(null)
+  const statefile = e => {
+    e.preventDefault()
+    setStateImage(e.target.files[0])
+  }
+
   const handleSubmit = async(e) =>{
     e.preventDefault()
     console.log("Creating a product")
-    await axios.post('/api/products',product)
+    console.log(product)
+    const formdata = new FormData()
+    formdata.append('image',stateImage)
+    console.log(stateImage)
+    await axios({
+      method:"POST",
+      url:'api/products',
+      data:{formdata,product}
+    }).then((res)=>{
+      console.log("Todo good")
+    })
+    
   }
 
   const handleChange = ({target:{name,value}}) =>{
@@ -33,7 +50,7 @@ const Formproduct = () => {
             <label htmlFor="stock">Cantidad:</label>
             <input type="number" name='stock'onChange={handleChange}/>
             <label htmlFor="imagen">Imagen:</label>
-            <input type="file" name="img" onChange={handleChange}/>
+            <input type="file" name="img" onChange={statefile}/>
             <button>Crear Producto</button>
         </form>
     </div>
