@@ -1,22 +1,22 @@
 import axios from "axios"
 import Main from "../components/main/Main"
 
-const Home = ({products}) => {
+const Home = () => {
   return (
     
-    <Main products={products}></Main>
+    <Main></Main>
 
   )
 }
 
-export const getServerSideProps = async(context) =>{
-  const {data:products} =await axios.get('http://localhost:3000/api/products')
+/*export const getServerSideProps = async(context) =>{
+  const {data:products} =await axios.get('http://localhost:3000/')
   
   return{
     props:{
       products
     }
   }
-}
+}*/
 
 export default Home
