@@ -22,9 +22,13 @@ router.get('/',(req,res)=>{
 
 
 router.post('/images/post',fileUpload,(req,res)=>{
-    const {products} = req.body
+    const {name,description,price,stock,barcode} = req.body
     res.status(200).json({name:'Todo esta bien'})
-    console.log(products)
+    console.log(name)
+    console.log(description)
+    console.log(price)
+    console.log(stock)
+    console.log(barcode)
     console.log(req.file)
 })
 
