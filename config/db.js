@@ -1,4 +1,4 @@
-import {createPool} from 'mysql2/promise'
+/*import {createPool} from 'mysql2/promise'
 
 const db = createPool({
     host:'localhost',
@@ -7,4 +7,4 @@ const db = createPool({
     database:'queensdb'
 })
 
-export{db};
+export{db};*/

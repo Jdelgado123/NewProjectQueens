@@ -26,10 +26,10 @@ const Formproduct = () => {
     fd.append('price',product.price),
     fd.append('stock',product.stock),
     fd.append('barcode',product.barcode),
-    fetch('http://192.168.100.3:3000/images/post',{
+    fetch(`http://192.168.0.166:3000/images/post`,{
       method:'POST',
       body:fd
-    }).then(res => res.text())
+    }).then(res => res.text()).catch(err => console.error(err))
 
   document.getElementById('name').value = null
   document.getElementById('description').value = null
@@ -41,7 +41,6 @@ const Formproduct = () => {
   const handleChange = ({target:{name,value}}) =>{
     setProduct({...product,[name]:value})
   }
-
   return (
     <div className='bg-gray-300'>
         <form onSubmit={handleSubmit}>
