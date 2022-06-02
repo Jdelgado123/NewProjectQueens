@@ -30,7 +30,7 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     const img = fs.readFileSync(path.join(__dirname,'../../imagesServer2/'+req.file.filename))
     const name_img = req.file.originalname
 
-    const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img,img})
+    const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img})
 
     console.log(result)
 
