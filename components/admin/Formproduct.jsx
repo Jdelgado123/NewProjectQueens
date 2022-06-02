@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 
-const Formproduct = () => {
+const Formproduct = ({category}) => {
 
   const[product,setProduct]=useState({
     name:"",
@@ -11,12 +11,14 @@ const Formproduct = () => {
     stock:0,
     barcode:"",
   })
-
+  const [categor,setCategor] = useState("")
   const [file,setFile]=useState(null)
   const statefile = e => {
     setFile(e.target.files[0])
   }
-
+  const statecategory = () =>{
+    setCategor(document.getElementById('category').value)
+  }
   const handleSubmit = e =>{
     e.preventDefault()
     const fd = new FormData()
@@ -26,7 +28,8 @@ const Formproduct = () => {
     fd.append('price',product.price),
     fd.append('stock',product.stock),
     fd.append('barcode',product.barcode),
-    fetch(`http://192.168.0.166:3000/images/post`,{
+    fd.append('category',categor)
+    fetch(`http://192.168.100.3:3000/images/post`,{
       method:'POST',
       body:fd
     }).then(res => res.text()).catch(err => console.error(err))
@@ -42,21 +45,27 @@ const Formproduct = () => {
     setProduct({...product,[name]:value})
   }
   return (
-    <div className='bg-gray-300'>
-        <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Producto:</label>
-            <input id="name" type="text" name='name' onChange={handleChange}/>
-            <label htmlFor="description">Descripción:</label>
-            <input id="description" type="text" name='description' rows="2" onChange={handleChange}/>
-            <label htmlFor="price">Precio:</label>
-            <input id="price" type="number" name='price' onChange={handleChange}/>
-            <label htmlFor="stock">Cantidad:</label>
-            <input id="stock" type="number" name='stock'onChange={handleChange}/>
-            <label htmlFor="barcode">Codigo de barras:</label>
-            <input id="barcode" type="text" name='barcode' onChange={handleChange}/>
-            <label htmlFor="imagen">Imagen:</label>
-            <input id="img" type="file" name="img" onChange={statefile}/>
-            <button>Crear Producto</button>
+    <div className='w-full max-w-xs'>
+        <form className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+          <label htmlFor="name" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Producto:</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="name" type="text" name='name' onChange={handleChange}/>
+          <label htmlFor="description" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Descripción:</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="description" type="text" name='description' rows="2"     onChange={handleChange}/>
+          <label htmlFor="price" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Precio:</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="price" type="number" name='price' onChange={handleChange}/>
+          <label htmlFor="stock" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Cantidad:</label>
+          <input  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="stock" type="number" name='stock'onChange={handleChange}/>
+          <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
+          <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
+            {category.map((cat,index)=>(
+              <option key={index} value={cat.id_category+""}>{cat.name}</option>
+            ))}
+          </select>
+          <label htmlFor="barcode" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Codigo de barras:</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="barcode" type="text" name='barcode' onChange={handleChange}/>
+          <label htmlFor="imagen" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen:</label>
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="img" type="file" name="img" onChange={statefile}/>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Crear Producto</button>
         </form>
     </div>
   )

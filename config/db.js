@@ -1,10 +1,10 @@
-/*import {createPool} from 'mysql2/promise'
+const createPool = require('mysql2/promise')
 
-const db = createPool({
+const db = createPool.createPool({
     host:'localhost',
     user:'root',
     password:'',
     database:'queensdb'
 })
 
-export{db};*/
+module.exports=db
