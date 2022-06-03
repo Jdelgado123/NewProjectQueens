@@ -39,7 +39,7 @@ const Formproduct = ({category,sub_category}) => {
     fd.append('stock',product.stock),
     fd.append('barcode',product.barcode),
     fd.append('category',categor)
-    fetch(`http://192.168.0.8:3000/images/post`,{
+    fetch(`http://localhost:3000/images/post`,{
       method:'POST',
       body:fd
     }).then(res => res.text()).catch(err => console.error(err))
@@ -50,6 +50,7 @@ const Formproduct = ({category,sub_category}) => {
   document.getElementById('stock').value = null
   document.getElementById('barcode').value = null
   document.getElementById('img').value = null
+  document.getElementById('category').value = null
   }
   const handleChange = ({target:{name,value}}) =>{
     setProduct({...product,[name]:value})
@@ -59,6 +60,7 @@ const Formproduct = ({category,sub_category}) => {
   return (
     <div className='w-full max-w-xs'>
         <form id='formPost' onChange={preventEnter} className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+          <h5 className="text-xl font-medium text-gray-900 dark:text-white">Creacion de productos</h5>
           <label htmlFor="name" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Producto:</label>
           <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="name" type="text" name='name' onChange={handleChange}/>
           <label htmlFor="description" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Descripción:</label>
@@ -69,8 +71,9 @@ const Formproduct = ({category,sub_category}) => {
           <input  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="stock" type="number" name='stock'onChange={handleChange}/>
           <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
           <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
+              <option value="null">Seleccione categoria</option>
             {category.map((cat,index)=>(
-              <option key={index} value={cat.id_category+""}>{cat.name}</option>
+              <option key={index} value={cat.id_category}>{cat.name}</option>
             ))}
           </select>
           

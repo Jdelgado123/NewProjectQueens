@@ -9,7 +9,7 @@ const Main = ({products}) => {
             <div>
                {products.map(product=>(
                  <div key={product.id}>
-                   <h1>{product.name}</h1>
+                   <Image src={"/imagesServer2/"+product.name_img} width={500} height={500}/>
                  </div>
                ))} 
             </div>

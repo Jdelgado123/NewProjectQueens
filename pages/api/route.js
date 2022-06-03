@@ -6,7 +6,7 @@ const fs = require('fs')
 const db =require('../../config/db')
 
 const diskStorage = multer.diskStorage({
-    destination:path.join(__dirname, '../../imagesServer2'),
+    destination:path.join(__dirname, '../../public/imagesServer2'),
     filename:(req,file,cb)=>{
         cb(null,Date.now()+"-"+file.originalname)
     }
@@ -26,12 +26,10 @@ router.get('/asas',(req,res)=>{
 
 router.post('/images/post',fileUpload,async(req,res)=>{
     const {name,description,price,stock,barcode,category} = req.body
-    
-    const img = fs.readFileSync(path.join(__dirname,'../../imagesServer2/'+req.file.filename))
-    const name_img = req.file.originalname
+
+    const name_img = req.file.filename
 
     const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img})
-
     console.log(result)
 
     /*req.getConnection((err,conn)=>{
