@@ -1,12 +1,19 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const db=require('../../config/db')
 
-async function handler(req, res) {
+ async function handler(req, res) {
 
-  const result = await db.query('SELECT NOW();')
-  console.log(result)
+  switch (req.method) {
+    case "GET":
+      return res.status(200).json("fa");
+    case "POST":
+      return await postUser(req, res)
+  }
+}
 
-  res.status(200).json(result)
+const postUser = async(req, res)=> {
+  console.log(req.body)
+  res.status(200).json(req.body)
 }
 
 export default handler;

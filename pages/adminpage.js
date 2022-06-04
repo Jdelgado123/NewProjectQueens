@@ -3,7 +3,7 @@ import axios from "axios"
 
 export default function adminpage({category}) {
   return (
-    <div>
+    <div className='grid place-items-center'>
       <Formproduct category={category}/>
     </div>
   )
