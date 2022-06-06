@@ -26,11 +26,11 @@ router.get('/asas',async(req,res)=>{
 
 
 router.post('/images/post',fileUpload,async(req,res)=>{
-    const {name,description,price,stock,barcode,category,subcategory} = req.body
+    const {name,description,price,stock,barcode,category,subcategory,location} = req.body
 
     const name_img = req.file.filename
     console.log(req.body)
-    const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img})
+    const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img,location})
     console.log(result)
     res.status(200).json(req.body)
 })

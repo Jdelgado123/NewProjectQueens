@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import axios from 'axios'
 import {FiShare} from 'react-icons/fi'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
@@ -42,4 +43,14 @@ function producDetails() {
   )
 }
 
+export const getServerSideProps = async(context) =>{
+  const {data:products} =await axios.get('http://192.168.0.8:3000/api/home');
+  return{
+    props:{
+      products,
+    }
+  }
+}
+
 export default producDetails
+

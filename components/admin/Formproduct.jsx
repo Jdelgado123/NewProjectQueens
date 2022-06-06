@@ -21,6 +21,7 @@ const Formproduct = ({ category }) => {
     description: "",
     price: 0,
     stock: 0,
+    location:"",
     barcode: "",
   })
   
@@ -54,8 +55,9 @@ const Formproduct = ({ category }) => {
       fd.append('stock', product.stock),
       fd.append('barcode', product.barcode),
       fd.append('category', categor),
-      fd.append('subcategory',subcate)
-    fetch(`http://192.168.100.3:3000/images/post`, {
+      fd.append('subcategory',subcate),
+      fd.append('location',product.location)
+    fetch(`http://192.168.0.8:3000/images/post`, {
       method: 'POST',
       body: fd
     }).then(res => res.text()).catch(err => console.error(err))
@@ -67,6 +69,7 @@ const Formproduct = ({ category }) => {
     document.getElementById('barcode').value = null
     document.getElementById('img').value = null
     document.getElementById('category').value = null
+    document.getElementById('sub_category').value = null
   }
   const handleChange = ({ target: { name, value } }) => {
     setProduct({ ...product, [name]: value })
@@ -101,6 +104,10 @@ const Formproduct = ({ category }) => {
         </select>
         <label htmlFor="barcode" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Codigo de barras:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="barcode" type="text" name='barcode' onChange={handleChange} />
+        
+        <label htmlFor="location" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Ubicación:</label>
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="location" type="text" name='location' onChange={handleChange} />
+        
         <label htmlFor="imagen" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="img" type="file" name="img" onChange={statefile} />
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Crear Producto</button>
