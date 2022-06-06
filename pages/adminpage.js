@@ -10,7 +10,7 @@ export default function adminpage({category}) {
 }
 
 export const getServerSideProps = async(context) =>{
-  const {data:category} =await axios.get('http://localhost:3000/api/categories');
+  const {data:category} =await axios.get('http://192.168.100.3:3000/api/categories');
   return{
     props:{
       category,

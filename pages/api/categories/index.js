@@ -1,6 +1,6 @@
-const db=require('../../config/db')
+const db=require('../../../config/db')
 
-async function handler(req, res) {
+async function handler2(req, res) {
 
     switch (req.method) {
         case "GET":
@@ -17,4 +17,4 @@ const getCategories = async(req,res)=>{
     return res.status(200).json(result)
 }
 
-export default handler;
+export default handler2;

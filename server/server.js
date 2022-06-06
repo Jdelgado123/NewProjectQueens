@@ -10,10 +10,11 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(()=>{
     const server = express();
+    server.use(express.json())
     server.use(require('../pages/api/route'))
     server.use(cors())
     server.use(express.static(path.join(__dirname,'../imagesServer2')))
-    server.get('*',(req,res)=>{
+    server.all('*',(req,res)=>{
         return handle(req,res)
     });
 

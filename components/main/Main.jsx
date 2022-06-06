@@ -1,116 +1,66 @@
 import Image from 'next/image'
 import React from 'react'
+import Link from 'next/link'
 
-
-const Main = ({products}) => {
+const Main = ({ products }) => {
   console.log(products)
   return (
-    <div className="p-4 max-w-md bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div className="flex justify-between items-center mb-4">
-      <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">SOLICITUDES DE COMPRA</h5>
-      <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-        View all
-      </a>
+    <div className='grid gap-4 grid-cols-2 md:grid-cols-4'>
+    {products.map((product,index)=>(
+      <div key={index} className="max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <Link href={`/product/${product.id_product}`}>
+        <Image className="p-8 rounded-t-lg" src={"/imagesServer2/"+product.name_img} width={400} height={250} alt="product image" />
+      </Link>
+      <div className="px-5 pb-5">
+        <a href="#">
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}</h5>
+        </a>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
+        <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Agregar al carrito</a>
+      </div>
     </div>
-    <div className="flow-root">
-      <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
-        <li className="py-3 sm:py-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0">
-                  </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                Neil Sims
-              </p>
-              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                email@windster.com
-              </p>
-            </div>
-            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-              $320
-            </div>
-          </div>
-        </li>
-        <li className="py-3 sm:py-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0">
-                    </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                Bonnie Green
-              </p>
-              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                email@windster.com
-              </p>
-            </div>
-            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-              $3467
-            </div>
-          </div>
-        </li>
-        <li className="py-3 sm:py-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0">
-                     </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                Michael Gough
-              </p>
-              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                email@windster.com
-              </p>
-            </div>
-            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-              $67
-            </div>
-          </div>
-        </li>
-        <li className="py-3 sm:py-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0">
-                  </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                Lana Byrd
-              </p>
-              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                email@windster.com
-              </p>
-            </div>
-            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-              $367
-            </div>
-          </div>
-        </li>
-        <li className="pt-3 pb-0 sm:pt-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0">
-                    </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                Thomes Lean
-              </p>
-              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                email@windster.com
-              </p>
-            </div>
-            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-              $2367
-            </div>
-          </div>
-        </li>
-      </ul>
+    ))}
     </div>
-    <a href="#" className="inline-flex items-center py-2 px-4 mr-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-      <svg className="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd"></path></svg>
-      Previous
-    </a>
-    <a href="#" className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-      Next
-      <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-    </a>
-  </div>
+    
   )
 }
 
 export default Main
+
+/*
+<div id="default-carousel" className="relative bg-black" data-carousel="static">
+      <div className="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
+        <div className="duration-1 ease-in-out" data-carousel-item>
+          <Image src={"/img/imagen1.jpg"} className=" block absolute  w-full" alt="..." height={650} width={1270} />
+        </div>
+
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+          <Image src={"/img/imagen1.jpg"} alt="..." layout='fill' />
+        </div>
+
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+          <Image src={"/img/imagen1.jpg"} alt="..." layout='fill' />
+        </div>
+      </div>
+
+      <div className="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+        <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+      </div>
+
+      <button type="button" className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
+          <span className="hidden">Previous</span>
+        </span>
+      </button>
+      <button type="button" className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next>
+        <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+          <span className="hidden">Next</span>
+        </span>
+      </button>
+    </div>*/

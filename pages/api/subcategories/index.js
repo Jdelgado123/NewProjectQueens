@@ -1,4 +1,4 @@
-const db=require('../../config/db')
+const db=require('../../../config/db')
 
 async function handler(req, res) {
 
@@ -7,14 +7,21 @@ async function handler(req, res) {
             return await getSubCategories(req,res)
     
         case "POST":
-            return console.log("aea post de mrd")
+            return await postSubCategories(req,res)
     }
   
 }
 
 const getSubCategories = async(req,res)=>{
+    const {id} = req.query
+    const [result] = await db.query("SELECT * FROM subcategory WHERE id_category=?",[id]);
+    return res.status(200).json(result)
+}
+
+const postSubCategories = async(req,res)=>{
     const [result] = await db.query("SELECT * FROM subcategory");
     return res.status(200).json(result)
 }
+
 
 export default handler;
