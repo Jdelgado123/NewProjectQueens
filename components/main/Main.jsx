@@ -6,9 +6,9 @@ import {AiOutlineShoppingCart} from 'react-icons/ai'
 const Main = ({ products }) => {
   console.log(products)
   return (
-    <div className='grid gap-4 grid-cols-1 md:grid-cols-3 items-center justify-between'>
+    <div className='grid gap-6 grid-cols-1 md:grid-cols-3 items-center justify-between'>
     {products.map((product,index)=>(
-      <div key={index} className="border-black border-2 max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 ">
+      <div key={index} className="border-8 border-rose-600 max-w-sm bg-white rounded-lg shadow-md">
       <Link href={`/product/${product.id_product}`}>
         <Image className="p-8 rounded-t-lg" src={"/imagesServer2/"+product.name_img} width={250} height={250} alt="product image" />
       </Link>
@@ -18,7 +18,7 @@ const Main = ({ products }) => {
       </Link>
       </div>  
       <div className="cart-icon flex items-center"> 
-        <span className="text-3xl font-bold text-gray-900 text-red pb-2 pl-10">S/<span className='text-5xl font-bold  text-gray-900 dark:text-white pb-2'>{product.price}</span></span>
+        <span className="text-3xl font-bold text-red-600/100 pb-2 pl-10">S/<span className='text-5xl font-bold  text-gray-900 dark:text-white pb-2'>{product.price}</span></span>
         
         <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><span><AiOutlineShoppingCart></AiOutlineShoppingCart></span></a>
       </div>

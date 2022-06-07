@@ -57,7 +57,7 @@ const Formproduct = ({ category }) => {
       fd.append('category', categor),
       fd.append('subcategory',subcate),
       fd.append('location',product.location)
-    fetch(`http://192.168.0.8:3000/images/post`, {
+    fetch(`http://localhost:3000/images/post`, {
       method: 'POST',
       body: fd
     }).then(res => res.text()).catch(err => console.error(err))
