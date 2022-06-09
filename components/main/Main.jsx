@@ -14,11 +14,11 @@ const Main = ({ products }) => {
       </Link>
       <div className="px-5 pb-5 items-center justify-between" > 
       <Link href={`/product/${product.id_product}`  }>
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name.toUpperCase()}</h5>
+          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-black">{product.name.toUpperCase()}</h5>
       </Link>
       </div>  
       <div className="cart-icon flex items-center"> 
-        <span className="text-3xl font-bold text-red-600/100 pb-2 pl-10">S/<span className='text-5xl font-bold  text-gray-900 dark:text-white pb-2'>{product.price}</span></span>
+        <span className="text-3xl font-bold text-red-600/100 pb-2 pl-10">S/<span className='text-5xl font-bold  text-gray-900 dark:text-black pb-2'>{product.price}</span></span>
         
         <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><span><AiOutlineShoppingCart></AiOutlineShoppingCart></span></a>
       </div>
