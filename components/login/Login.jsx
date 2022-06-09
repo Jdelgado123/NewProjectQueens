@@ -35,8 +35,8 @@ const Login = () => {
 
 
   return (
-    <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <form className="space-y-6" onSubmit={handleSubmit}>
+    <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 place-content-center">
+      <form className='space-y-6 place-content-center' onSubmit={handleSubmit}>
         <h5 className="text-xl font-medium text-gray-900 dark:text-white">Bienvenido a QueensStore</h5>
         <div>
           <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Usuario</label>

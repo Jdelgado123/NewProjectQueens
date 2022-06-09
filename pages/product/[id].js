@@ -3,10 +3,11 @@ import axios from 'axios'
 import { FiShare } from 'react-icons/fi'
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import Image from 'next/image'
+import Layout from '../../components/Layout' 
 
 function producDetails({product}) {
-  console.log(product)
   return (
+    <Layout>
     <div>
       <div className="product-detail-container">
         <div>
@@ -16,7 +17,7 @@ function producDetails({product}) {
             </div>
           </div>
           <div className="small-images-container">
-              <Image src={"/imagesServer2/"+product[0].name_img} width={370} height={370}></Image>
+              <Image src={"/imagesServer2/"+product[0].name_img} width={370} height={370} alt="..."></Image>
           </div>
         </div>
 
@@ -27,10 +28,10 @@ function producDetails({product}) {
           <p className="price">{product[0].price}</p>
           <div className="quantity">
             <h3>Cantidad:</h3>
-            <p className="quantity-desc">
-              <span className="minus"><AiOutlineMinus /></span>
-              <span className="num">1</span>
-              <span className="plus"><AiOutlinePlus /></span>
+            <p className="justify-between grid gap-4 grid-cols-3 items-center">
+              <span className="text-red-500/100"><AiOutlineMinus /></span>
+              <span className="num">2</span>
+              <span className="text-green-500/100"><AiOutlinePlus /></span>
             </p>
           </div>
           <div className="buttons">
@@ -42,6 +43,7 @@ function producDetails({product}) {
         </div>
       </div>
     </div>
+    </Layout>
   )
 }
 
