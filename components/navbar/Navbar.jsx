@@ -7,7 +7,7 @@ const Navbar = () => {
   <div className="container flex flex-wrap justify-between items-center mx-auto">
     <Link href={"/"}>
     <a href="#" className="flex items-center">
-        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">QueensStore</span>
+        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">Zaffari's</span>
     </a>
     </Link>
     

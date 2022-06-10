@@ -16,14 +16,14 @@ const succes = () => {
 
     return (
         <Layout>
-        <div className='success-wrapper'>
-            <div className='success'>
+        <div className='success-wrapper mx-auto min-h-screen place-content-center grid w-full'>
+            <div className='bg-gray-400/100 mx-auto items-center place-content-center w-full flex justify-center flex-col p-12 rounded-lg gap-6'>
                 <p className='icon'>
                     <BsBagCheckFill></BsBagCheckFill>
                 </p>
                 <h2>Gracias por comprar en Zaffari's</h2>
-                <p className='email-msg'>Anote el numero de compra para que pueda pagar en caja,0014255</p>
-                <p className='description'>Si no se realiza el pago dentro de los 30 min despues de ver esta pagina,<a className='email'> se eliminara su compra</a></p>
+                <p className='email-msg'>Anote el numero de compra para que pueda pagar en caja <a className='text-red-500/100'>0014255</a></p>
+                <p className='description'>Si no se realiza el pago dentro de los 30 min despues de ver esta pagina,<a className='text-red-500/100'> SE ELIMINARA SU PEDIDO</a></p>
                 <Link href="/">
                     <button type='button' className='btn' width="300px" >Continuar Comprando</button>
                 </Link>

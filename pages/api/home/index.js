@@ -13,7 +13,7 @@ async function handler(req, res) {
 }
 
 const getProducts = async (req, res) => {
-    const [result] = await db.query("SELECT id_product,name,description,price,stock,barcode,name_img FROM products");
+    const [result] = await db.query("SELECT id_product,name,description,price,stock,barcode,name_img,currency FROM products");
     return res.status(200).json(result)
 }
 
