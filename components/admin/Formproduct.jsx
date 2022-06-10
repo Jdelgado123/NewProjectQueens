@@ -63,7 +63,7 @@ const Formproduct = ({ category }) => {
       fd.append('subcategory', subcate),
       fd.append('location', product.location.toUpperCase()),
       fd.append('currency', currency)
-    fetch(`http://192.168.100.3:3000/images/post`, {
+    fetch(`http://192.168.0.8:3000/images/post`, {
       method: 'POST',
       body: fd
     }).then(res => res.text()).catch(err => console.error(err))
@@ -122,8 +122,8 @@ const Formproduct = ({ category }) => {
         <label htmlFor="location" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Moneda:</label>
         <select name="currency" id="currency" className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white' onChange={stateCurrency} required>
           <option value="null">Seleccione el tipo de moneda</option>
-          <option value="PEN">PEN: Soles peruanos</option>
-          <option value="USD">USD: Dolares Americanos</option>
+          <option value="PEN">Soles</option>
+          <option value="USD">Dolares</option>
         </select>
 
         <label htmlFor="imagen" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen:</label>

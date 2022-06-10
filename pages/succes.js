@@ -21,12 +21,9 @@ const succes = () => {
                 <p className='icon'>
                     <BsBagCheckFill></BsBagCheckFill>
                 </p>
-                <h2>Gracias por comprar en Zaffari's</h2>
-                <p className='email-msg'>Anote el numero de compra para que pueda pagar en caja <a className='text-red-500/100'>0014255</a></p>
-                <p className='description'>Si no se realiza el pago dentro de los 30 min despues de ver esta pagina,<a className='text-red-500/100'> SE ELIMINARA SU PEDIDO</a></p>
-                <Link href="/">
-                    <button type='button' className='btn' width="300px" >Continuar Comprando</button>
-                </Link>
+                <h2>PEDIDO</h2>
+                <h1 className='text-red-500/100 text-4x1'>0014255</h1>
+                <h2 className='description'>PASAR POR CAJA</h2  >
             </div>
         </div>
         </Layout>
