@@ -17,7 +17,7 @@ const succes = () => {
     return (
         <Layout>
         <div className='success-wrapper mx-auto min-h-screen place-content-center grid w-full'>
-            <div className='bg-gray-400/100 mx-auto items-center place-content-center w-full flex justify-center flex-col px-80 rounded-lg gap-6'>
+            <div className='bg-gray-400/100 mx-auto items-center place-content-center w-full flex justify-center flex-col px-60 rounded-lg gap-6'>
                 <p className='icon'>
                     <BsBagCheckFill></BsBagCheckFill>
                 </p>
