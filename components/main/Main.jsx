@@ -20,12 +20,12 @@ const Main = ({ products }) => {
           </div>
           <div className="pb-5 items-center justify-center content-center" >
             <Link href={`/product/${product.id_product}`}>
-              <h5 className="text-xl text-center font-semibold tracking-tight text-gray-900 dark:text-black">Zaffari´s Boutique</h5>
+              <h5 className="text-xl text-center font-semibold tracking-tight text-gray-900 dark:text-black">{product.name.toUpperCase()}</h5>
             </Link> 
           </div>
           <div className="items-center grid grid-flow-col">
             <div className='content-start text-start justify-start'>
-              <span className="pl-5 text-7xl font-bold text-red-600/100 pb-2 pl-10">{product.currency=="USD"?"$":"S/."}<span className='text-7xl font-bold text-red-600/100 dark:text-black pb-2'>{product.price}0</span></span>
+              <span className=" text-7xl font-bold text-red-600/100 pb-2 pl-10">{product.currency=="USD"?"$":"S/."}<span className='text-7xl font-bold text-red-600/100 dark:text-black pb-2'>{product.price}</span></span>
             </div>  
             <div className='cart-icon content-end flex justify-end pr-3'>
               <Link href={"/succes"}>

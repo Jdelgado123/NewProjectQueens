@@ -1,37 +1,50 @@
 import Link from 'next/link'
 import React from 'react'
+import { AiOutlineShopping } from 'react-icons/ai'
+import { useStateContext } from '../../context/StateContext'
+import Cart from '../cart/Cart'
+
 
 const Navbar = () => {
+  const { showCart, setShowCart, totalQuantities } = useStateContext();
+  
   return (
     <nav className="bg-black flex border-gray-200 px-2 sm:px-5 py-2.5 dark:bg-gray-800">
-  <div className="container flex flex-wrap justify-between items-center mx-auto">
-    <Link href={"/"}>
-    <a href="#" className="flex items-center">
-        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">Zaffari's Boutique</span>
-    </a>
-    </Link>
-    
-    <div className="w-full md:block md:w-auto">
-      <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-        <li>
-          <Link href={"/adminpage"}>
-          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
-          </Link>
-        </li>
-        <li>
-          <Link href={"/login"}>
-          <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">login</a>
-          </Link>
-        </li>
-        <li>
-          <Link href={"/"}>
-            <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">More</a>
-          </Link>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      <div className="container flex flex-wrap justify-between items-center mx-auto">
+        <Link href={"/"}>
+          <a href="#" className="flex items-center">
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">Zaffari's Boutique</span>
+          </a>
+        </Link>
+
+        <div className="w-full md:block md:w-auto">
+          <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+            <li>
+              <Link href={"/adminpage"}>
+                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Admin</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/login"}>
+                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">login</a>
+              </Link>
+            </li>
+            <li>
+              <Link href={"/"}>
+                <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">More</a>
+              </Link>
+            </li>
+            <button type='button' className='cart-icon' onClick={() => {
+              setShowCart(true)
+            }}>
+              <AiOutlineShopping></AiOutlineShopping>
+              <span className='cart-item-qty'>{totalQuantities}</span>
+            </button>
+            {showCart && <Cart></Cart>}
+          </ul>
+        </div>
+      </div>
+    </nav>
   )
 }
 
