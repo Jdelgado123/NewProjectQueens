@@ -5,7 +5,9 @@ import Teller from '../components/teller/Teller'
 const teller = () => {
     return (
         <Layout>
+            <div className='place-content-center grid w-full'>
             <Teller></Teller>
+            </div>
         </Layout>
 
     )

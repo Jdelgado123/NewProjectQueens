@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import Image from 'next/image';
+import axios from 'axios'
 
 import { useStateContext } from '../../context/StateContext';
 
@@ -11,6 +12,10 @@ const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
 
+
+  const sendRequired = async(cartItems) =>{
+    await axios.post('/api/teller',cartItems)
+  }
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -77,11 +82,9 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="buttons">
-              <a href= {`https://wa.me/51986775834?text=El%20carrito%20tiene%20${totalPrice}%20de%20valor,%20lista%20de%20compras${cartItems.map((item)=>("%0AObjeto:"+item.name+"  Precio Unitario:"+item.price+" Cantidad:"+item.quantity+"%0A"))}`} rel='noreferrer' target="_blank">
-              <button type="button" className="buy-now">
+              <button type="button" className="buy-now" onClick={()=>sendRequired(cartItems)}>
                 Pagar Ahora
               </button>
-              </a>
             </div>
           </div>
         )}
@@ -91,3 +94,13 @@ const Cart = () => {
 }
 
 export default Cart
+
+/* 
+
+<a href= {`https://wa.me/51986775834?text=El%20carrito%20tiene%20${totalPrice}%20de%20valor,%20lista%20de%20compras${cartItems.map((item)=>("%0AObjeto:"+item.name+"  Precio Unitario:"+item.price+" Cantidad:"+item.quantity+"%0A"))}`} rel='noreferrer' target="_blank">
+              <button type="button" className="buy-now">
+                Pagar Ahora
+              </button>
+              </a>
+
+*/
