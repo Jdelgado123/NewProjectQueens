@@ -55,7 +55,7 @@ const Teller = () => {
                 <div className="buttons">
 
                   <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => getRequires(item.id_required)}>Pagar</button>
+                    <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => getRequires(item.id_required)}>Cancelado</button>
                     <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" onClick={() => togleModal(item.id_required)}>Ver productos</button>
                   </div>
                 </div>
@@ -73,40 +73,36 @@ const Teller = () => {
 
                 <div className="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
                   <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                    Extra Large modal
+                    Vista de productos
                   </h3>
                   <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="extralarge-modal" onClick={() => togleModal()}>
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                   </button>
                 </div>
-                <div className='grid gap-6 grid-cols-1 md:grid-cols-3 items-center justify-between'>
-                {(faa === null) ? null : faa.map((product, index) => (
-                  <div key={index} className="border border-solid border-blue-700/100 max-w-sm bg-white rounded-lg shadow-xl">
-                    <div className='p-5 shadow-xl roundend-lg'>
-                      <div className='border-2 p-1 border-solid rounded-2xl border-yellow-400/100 items-center content-center justify-center object-center'>
 
-                        <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img} width={275} height={190} alt="product image" />
+                <div class="not-prose relative bg-slate-50 rounded-xl overflow-x-scroll dark:bg-slate-800/25"><div class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div><div class="relative rounded-xl overflow-auto">
 
-                      </div>
-                    </div>
-                    <div className="pb-5 items-center justify-center content-center" >
-                      
-                      <h5 className="text-xl text-center font-semibold tracking-tight text-gray-900 dark:text-black">{product.name.toUpperCase()}</h5>
-                      
-                    </div>
-                    <div className="items-center grid grid-flow-col">
-                      <div className='content-start text-start justify-start'>
-                        <span className=" text-7xl font-bold text-red-600/100 pb-2 pl-10">{product.state == "USD" ? "$" : "S/."}<span className='text-7xl font-bold text-red-600/100 dark:text-black pb-2'>{product.price}</span></span>
-                      </div>
-
-                    </div>
+                  <div class="flex ml-[50%] items-end justify-start pt-10 mb-6">
+                    <div class="ml-2 rounded font-mono text-[0.625rem] leading-6 px-1.5 ring-1 ring-inset bg-indigo-50 text-indigo-600 ring-indigo-600 dark:bg-indigo-500 dark:ring-0 dark:text-white dark:highlight-white/10"></div>
+                    <div class="absolute top-0 bottom-0 left-1/2 border-l border-indigo-500"></div>
                   </div>
-                ))}
-                </div>
+
+                  <div class="relative w-full flex gap-6 snap-x overflow-x-auto pb-14">
+                    <div class="snap-center shrink-0">
+                      <div class="shrink-0 w-4 sm:w-48"></div>
+                    </div>
+                    {(faa === null) ? null : faa.map((product, index) => (
+                      <div class="snap-center shrink-0 first:pl-8 last:pr-8">
+                        <Image src={'/imagesServer2/' + product.name_img} width={600} height={300} />
+                      </div>
+                    ))} 
+
+                  </div>
+                </div><div class="absolute inset-0 pointer-events-none border border-black/5 rounded-xl dark:border-white/5"></div></div>
 
                 <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                  <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-                  <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+                  <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">LISTO</button>
+                  <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">CERRAR</button>
                 </div>
               </div>
             </div>

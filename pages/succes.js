@@ -16,15 +16,11 @@ const succes = () => {
 
     return (
         <Layout>
-        <div className='success-wrapper mx-auto min-h-screen place-content-center grid w-full'>
-            <div className='bg-gray-400/100 mx-auto items-center place-content-center w-full flex justify-center flex-col px-60 rounded-lg gap-6'>
-                <p className='icon'>
-                    <BsBagCheckFill></BsBagCheckFill>
-                </p>
-                <h2>PEDIDO</h2>
-                <div><QRCodeSVG value='001425558'></QRCodeSVG></div>
-                <h1 className='text-red-500/100 text-4x1'>0014255</h1>
-                <h2 className='description'>PASAR POR CAJA</h2  >
+        <div className='success-wrapper mx-auto min-h-screen place-content-center bg-gray-400 grid w-full'>
+            <div className='bg-gray-400 px-20 mx-auto items-center place-content-center w-full flex justify-center flex-col px-32s py-8 rounded-lg gap-6'>
+                <h2 className='text-xl'>PASAR POR CAJA</h2>
+                <div><QRCodeSVG size={200} value='0014255'></QRCodeSVG></div>
+                <h1 className='text-red-500/100 text-5xl font-bold'>0014255</h1>
             </div>
         </div>
         </Layout>

@@ -39,9 +39,6 @@ function producDetails({ product }) {
             </div>
             <div className="buttons">
               <button type="button" className="add-to-cart" onClick={()=> onAdd(product[0],qty)}>Agregar al Carrito</button>
-              <a rel='noreferrer' target="_blank">
-                <button type="button" className="buy-now">Comprar ahora</button>
-              </a>
             </div>
           </div>
         </div>

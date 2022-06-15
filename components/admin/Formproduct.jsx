@@ -63,7 +63,7 @@ const Formproduct = ({ category }) => {
       fd.append('subcategory', subcate),
       fd.append('location', product.location.toUpperCase()),
       fd.append('currency', currency)
-    fetch(`http://localhost:3000/images/post`, {
+    fetch(`http://192.168.0.8:3000/images/post`, {
       method: 'POST',
       body: fd
     }).then(res => res.text()).catch(err => console.error(err))
