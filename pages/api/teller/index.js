@@ -21,11 +21,17 @@ const getTeller = async(req,res)=>{
 
 const postTeller = async(req,res)=>{
     const array = req.body
+    console.log(array)
+
     const [result] = await db.query("INSERT INTO required SET ?",{total_cost:250})
     console.log(result)
     
     array.map(async(item)=>{
-        const [todoChevere] = await db.query("INSERT INTO products_required SET ?",{id_required:result.insertId,id_product:item.id_product})
+        const rest = item.stock-item.quantity
+        const [update] = await db.query("UPDATE products SET stock=? WHERE id_product=?",[rest,item.id_product])
+        const [todoChevere] = await db.query("INSERT INTO products_required SET ?",{id_required:result.insertId,id_product:item.id_product,stock:item.quantity})
+        
+        console.log(update)
         console.log(todoChevere)
     });
 }

@@ -8,10 +8,9 @@ import Cart from '../cart/Cart'
 const Navbar = () => {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
   const aea = () => {
-    console.log('me diste click')
     document.querySelector('#menu').classList.toggle('hidden')
   }
-
+  
   return (
     <nav className="bg-black flex border-gray-200 px-2 sm:px-5 py-2.5 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">

@@ -1,18 +1,26 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react'
 import {useEffect} from 'react'
 import Link from 'next/link'
 import { BsBagCheckFill } from 'react-icons/bs'
-import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import {runFireworks} from '../utils/confetti'
 import { QRCodeSVG } from 'qrcode.react'
+import { useStateContext } from '../context/StateContext'
 
 const succes = () => {
 
+    const {showCart,setShowCart,setCartItems,setTotalQuantities} = useStateContext();
+
     useEffect(()=>{
         localStorage.clear()
+        setShowCart(false)
+        setCartItems([])
+        setTotalQuantities(0)
         runFireworks()
-    },[])
+    },[setCartItems, setShowCart,setTotalQuantities])
+
+    console.log(showCart)
 
     return (
         <Layout>

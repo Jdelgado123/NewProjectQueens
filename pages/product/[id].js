@@ -5,6 +5,7 @@ import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useStateContext } from '../../context/StateContext'
+import toast,{ Toaster } from 'react-hot-toast'
 
 function producDetails({ product }) {
   const [index, setIndex] = useState(0);
@@ -12,6 +13,7 @@ function producDetails({ product }) {
   return (
     <Layout>
       <div>
+        <div><Toaster></Toaster></div>
         <div className="product-detail-container">
           <div>
             <div className="image-container">
@@ -28,13 +30,13 @@ function producDetails({ product }) {
             <h1>{product[0].name}</h1>
             <h4>Detalles: </h4>
             <p>{product[0].description}</p>
-            <p className="price">{product[0].price}</p>
+            <p className="price">{product[0].currency=="USD"?"$":"S/."}{product[0].price}</p>
             <div className="quantity">
               <h3>Cantidad:</h3>
               <p className="justify-between grid gap-4 grid-cols-3 items-center">
                 <span className="text-red-500/100" onClick={decQty}><AiOutlineMinus /></span>
                 <span className="num">{qty}</span>
-                <span className="text-green-500/100" onClick={incQty}><AiOutlinePlus /></span>
+                <span className="text-green-500/100" onClick={()=>(qty>=product[0].stock)?toast.error("Ya no hay productos en el almacen"):incQty()}><AiOutlinePlus /></span>
               </p>
             </div>
             <div className="buttons">

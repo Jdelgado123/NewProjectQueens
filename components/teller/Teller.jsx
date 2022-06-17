@@ -30,6 +30,7 @@ const Teller = () => {
     document.querySelector('#modal').classList.toggle('hidden')
   }
   return (
+
     <div className="p-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 h-max w-max">
       <div className="flex justify-between items-center mb-4">
         <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">SOLICITUDES DE COMPRA</h5>
@@ -55,8 +56,8 @@ const Teller = () => {
                 <div className="buttons">
 
                   <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => getRequires(item.id_required)}>Cancelado</button>
-                    <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" onClick={() => togleModal(item.id_required)}>Ver productos</button>
+                    <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={() => getRequires(item.id_required)}>Eliminar</button>
+                    <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10" onClick={() => togleModal(item.id_required)}>Ver productos</button>
                   </div>
                 </div>
               </div>
@@ -64,7 +65,7 @@ const Teller = () => {
             </li>
           ))}
 
-          <div id="modal" tabIndex="-1" className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">
+          <div id="modal" tabIndex="-1" className="hidden overflow-y-auto overflow-x-visible fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">
             <div className='fixed inset-0 bg-gray-700 bg-opacity-70'></div>
 
             <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
@@ -80,25 +81,53 @@ const Teller = () => {
                   </button>
                 </div>
 
-                <div class="not-prose relative bg-slate-50 rounded-xl overflow-x-scroll dark:bg-slate-800/25"><div class="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div><div class="relative rounded-xl overflow-auto">
+                <div className="not-prose relative bg-slate-50 rounded-xl overflow-x-scroll dark:bg-slate-800/25"><div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,0.6))] dark:bg-grid-slate-700/25 dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div><div className="relative rounded-xl overflow-auto">
 
-                  <div class="flex ml-[50%] items-end justify-start pt-10 mb-6">
-                    <div class="ml-2 rounded font-mono text-[0.625rem] leading-6 px-1.5 ring-1 ring-inset bg-indigo-50 text-indigo-600 ring-indigo-600 dark:bg-indigo-500 dark:ring-0 dark:text-white dark:highlight-white/10"></div>
-                    <div class="absolute top-0 bottom-0 left-1/2 border-l border-indigo-500"></div>
-                  </div>
 
-                  <div class="relative w-full flex gap-6 snap-x overflow-x-auto pb-14">
-                    <div class="snap-center shrink-0">
-                      <div class="shrink-0 w-4 sm:w-48"></div>
-                    </div>
-                    {(faa === null) ? null : faa.map((product, index) => (
-                      <div class="snap-center shrink-0 first:pl-8 last:pr-8">
-                        <Image src={'/imagesServer2/' + product.name_img} width={600} height={300} />
+                  <div className='relative rounded-xl overflow-auto p-8'>
+                    <div className='flex items-center gap-2 p-2'>
+                      <div className="overflow-y-auto h-72 relative max-w-sm mx-auto bg-white shadow-lg ring-1 ring-black/5 rounded-xl flex flex-col divide-y">
+
+                        {(faa === null) ? null : faa.map((product, index) => (
+                          <div className="flex items-center gap-4 p-4" key={index}>
+                            <Image src={'/imagesServer2/' + product.name_img} width={400} height={400} alt="..." objectFit="revert" className='aspect-video object-cover' />
+                            <div className="flex flex-col">
+                              <strong className="text-slate-900 text-sm font-medium dark:text-slate-200">{product.name}</strong>
+                              <div className='flex items-center gap-2 w-52'>
+                                <span className="text-slate-500 text-sm font-medium dark:text-slate-400">Ubicacion: {product.location}</span>
+                                <span className="text-slate-500 text-sm font-medium dark:text-slate-400">Precio: {product.price}</span>
+                              </div>
+
+                            </div>
+                          </div>
+                        ))}
+
                       </div>
-                    ))} 
-
+                      <div className='overflow-y-auto h-72 max-w-sm mx-auto bg-white shadow-lg ring-1 ring-black/5 rounded-xl divide-y items-center'>
+                        <ul role="list" className="[&>*]:p-4 [&>*]:bg-white [&>*]:rounded-lg [&>*]:shadow space-y-4">
+                          <table className="text-left w-full border-collapse">
+                            <thead>
+                              <tr>
+                                <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Producto</th>
+                                <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Cantidad</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {(faa === null) ? null : faa.map((product, index) => (
+                              <tr className="hover:bg-grey-lighter" key={index}>
+                                <td className="py-4 px-6 border-b border-grey-light">{product.name}</td>
+                                <td className="py-4 px-6 border-b border-grey-light text-center">
+                                  {product.stock}
+                                </td>
+                              </tr>
+                               ))}
+                            </tbody>
+                          </table>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                </div><div class="absolute inset-0 pointer-events-none border border-black/5 rounded-xl dark:border-white/5"></div></div>
+                </div><div className="absolute inset-0 pointer-events-none border border-black/5 rounded-xl dark:border-white/5"></div></div>
 
                 <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                   <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">LISTO</button>

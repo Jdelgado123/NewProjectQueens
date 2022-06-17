@@ -12,9 +12,10 @@ const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
 
-
   const sendRequired = async (cartItems) => {
+
     await axios.post('/api/teller', cartItems)
+
   }
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -47,7 +48,7 @@ const Cart = () => {
         <div className="product-container">
           {cartItems.length >= 1 && cartItems.map((item) => (
             <div className="product" key={item.id_product}>
-              <Image src={"/imagesServer2/1654534728750-oso.jpg"} className="cart-product-image" width={375} height={290} alt="..." />
+              <Image src={"/imagesServer2/"+item.name_img} className="cart-product-image" width={375} height={290} alt="..." />
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
