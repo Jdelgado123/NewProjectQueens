@@ -101,9 +101,7 @@ const Formproduct = ({ category }) => {
         <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
         <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
           <option value="null">Seleccione categoria</option>
-          {category.map((cat, index) => (
-            <option key={index} value={cat.id_category}>{cat.name}</option>
-          ))}
+          
         </select>
 
         <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Subcategory:</label>

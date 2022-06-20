@@ -12,7 +12,7 @@ const Teller = () => {
 
   useEffect(() => {
     async function ga() {
-      const { data } = await axios.get('/api/caja')
+      const { data } = await axios.get('/api/requires')
       console.log(data)
       setDat(data)
     }

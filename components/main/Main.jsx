@@ -26,7 +26,7 @@ const Main = ({ products }) => {
           <div className="items-center grid grid-cols-2 gap-2 sm:grids-cols-1 md:gap-3">
             <div className='grid grid-cols-2 content-start text-center justify-start'>
               <div className='pb-2 pt-1 '>
-                <span className="pl-2 text-5xl font-bold text-rose-300  pb-5 md:text-6xl pl-2">{product.currency=="USD"?"$":"S/."}</span>
+                <span className="pl-2 text-5xl font-bold text-rose-300 pb-5 md:text-6xl">{product.currency=="USD"?"$":"S/."}</span>
               </div> 
               <div className='pb-4'>
               <span className='text-6xl pl-3 font-bold text-rose-300 dark:text-black pt-2 md:text-7xl'>{product.price}</span>  
