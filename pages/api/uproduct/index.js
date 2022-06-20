@@ -1,3 +1,5 @@
+
+
 const db = require('../../../config/db')
 
 async function handler(req, res) {
@@ -8,6 +10,8 @@ async function handler(req, res) {
 
         case "POST":
             return await postProducts(req, res)
+        case "DELETE":
+            return await deleteProduct(req,res)
     }
 
 }
@@ -24,6 +28,14 @@ const postProducts=async(req, res) =>{
     const {idbody} = req.body
     const [result] = await db.query("SELECT * FROM products WHERE id_product=?",[idbody]);
     return res.status(200).json(result)
+}
+
+const deleteProduct=async(req,res) =>{
+    const {id} = req.body
+    console.log(req)
+    const [result] = await db.query('DELETE FROM products WHERE id_product=?',[id]);
+    return res.status(200).json(result)
+
 }
 
 export default handler;
