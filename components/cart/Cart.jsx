@@ -32,7 +32,7 @@ const Cart = () => {
         {cartItems.length < 1 && (
           <div className="empty-cart">
 
-            <h3>Tu carrito esta vacío </h3>
+            <h3 className='p-12'>Tu carrito esta vacío </h3>
             <Link href="/">
               <button
                 type="button"

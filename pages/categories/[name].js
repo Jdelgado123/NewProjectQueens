@@ -1,21 +1,22 @@
-import Image from 'next/image'
-import React,{useState} from 'react'
+import React from 'react'
+import axios from 'axios'
 import Link from 'next/link'
+import Image from 'next/image'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
+import Layout from '../../components/Layout'
 
-const Main = ({ products }) => {
-
+const categories = ({products}) => {
+    
   return (
+    <Layout>
     <div className='grid gap-6 grid-cols-1 md:grid-cols-3 items-center justify-between'>
       {products.map((product, index) => (
         <div key={index} className="border border-solid border-blue-700/100 max-w-sm bg-white rounded-lg shadow-xl">
           <div className='p-5 shadow-xl roundend-lg'>
-          <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center justify-center object-center'>
-          
+          <div className='border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center justify-center object-center'>
             <Link href={`/product/${product.id_product}`}>
               <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img} width={375} height={290} alt="product image" />
             </Link>
-            {(product.stock==0)?<div className='absolute bottom-0 right-0'><div className='relative'><Image src={"/img/Agotado.png"} width={150} height={50} alt="asa" className='absolute bottom-0 right-0'/><h1 className='text-2xl text-red-700'>Agotado</h1></div></div>:null}
           </div>
           </div>
           <div className="pb-5 items-center justify-center content-center" >
@@ -41,8 +42,18 @@ const Main = ({ products }) => {
         </div>
       ))}
     </div>
-
+    </Layout>
   )
 }
 
-export default Main
+export const getServerSideProps = async(context) =>{
+    const {name} = context.query
+    const {data:products} =await axios.get('http://localhost:3000/api/categoriesList',{ params: { name: name } });
+    return{
+      props:{
+        products,
+      }
+    }
+  }
+
+export default categories
