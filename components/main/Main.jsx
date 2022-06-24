@@ -15,12 +15,12 @@ const Main = ({ products }) => {
             <Link href={`/product/${product.id_product}`}>
               <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img} width={375} height={290} alt="product image" />
             </Link>
-            {(product.stock==0)?<div className='absolute bottom-0 right-0'><Image src={"/img/Agotado.png"} width={150} height={50} alt="asa" /><h1 className='text-3xl absolute top-1 left-4'>Agotado</h1></div>:null}
+            {(product.stock==0)?<div className='absolute bottom-0 rounded-br-lg right-0 bg-rose-400 border-solid border-red-700 border-1'><h1 className='text-3xl text-white '>AGOTADO</h1></div>:null}
           </div>
           </div>
           <div className="pb-5 items-center justify-center content-center" >
             <Link href={`/product/${product.id_product}`}>
-              <h2 className="text-xl text-center text-blue-700 dark:text-black">{product.name}</h2>
+              <h2 className="text-xl text-center font-serif text-blue-700 dark:text-black">{product.name}</h2>
             </Link> 
           </div>
           <div className="items-center grid grid-cols-2 gap-2 sm:grids-cols-1 md:gap-3">

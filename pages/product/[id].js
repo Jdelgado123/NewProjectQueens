@@ -17,9 +17,7 @@ function producDetails({ product }) {
         <div className="product-detail-container">
           <div>
             <div className="image-container">
-              <div className='ishared'>
-                <a className='ishared-color' rel='noreferrer' target="_blank"><span><FiShare></FiShare></span></a>
-              </div>
+              
             </div>
             <div className="small-images-container">
               <Image src={"/imagesServer2/" + product[0].name_img} width={370} height={370} alt="..."></Image>
@@ -53,7 +51,7 @@ export const getServerSideProps = async (context) => {
   const { query } = context
   const { id } = query
   const aea = { idbody: id }
-  const { data: product } = await axios.post('http://localhost:3000/api/uproduct', aea);
+  const { data: product } = await axios.post('http://192.168.0.8:3000/api/uproduct', aea);
   return {
     props: {
       product,

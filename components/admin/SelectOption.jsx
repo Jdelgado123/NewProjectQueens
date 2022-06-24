@@ -54,7 +54,8 @@ const SelectOption = () => {
                     <p className="mt-2 text-sm text-slate-500">Elimine directamente los productos de la base de datos</p>
                 </div>
                 </Link>
-
+                
+                <Link href={'/report'}>
                 <div className="p-10 flex flex-col items-center text-center group  md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
                 <span className="p-5 rounded-full bg-teal-500 text-white shadow-lg shadow-teal-200"><svg
                         xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24"
@@ -64,7 +65,8 @@ const SelectOption = () => {
                     </svg></span>
                     <p className="text-xl font-medium text-slate-700 mt-3">Crear Reporte</p>
                     <p className="mt-2 text-sm text-slate-500">Vea y cree reportes del mismo dia o semanales</p>
-                </div>    
+                </div> 
+                </Link>   
             </div>
 
         </div>
