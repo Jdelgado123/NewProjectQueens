@@ -15,7 +15,7 @@ const Main = ({ products }) => {
             <Link href={`/product/${product.id_product}`}>
               <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img} width={375} height={290} alt="product image" />
             </Link>
-            {(product.stock==0)?<div className='absolute bottom-0 right-0'><div className='relative'><Image src={"/img/Agotado.png"} width={150} height={50} alt="asa" className='absolute bottom-0 right-0'/><h1 className='text-2xl text-red-700'>Agotado</h1></div></div>:null}
+            {(product.stock==0)?<div className='absolute bottom-0 right-0'><Image src={"/img/Agotado.png"} width={150} height={50} alt="asa" /><h1 className='text-3xl absolute top-1 left-4'>Agotado</h1></div>:null}
           </div>
           </div>
           <div className="pb-5 items-center justify-center content-center" >
