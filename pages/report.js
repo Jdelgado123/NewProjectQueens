@@ -37,7 +37,7 @@ function report({report}) {
 }
 
 export const getServerSideProps = async (context) => {
-    const { data: report } = await axios.get('http://192.168.0.8:3000/api/report');
+    const { data: report } = await axios.get('http://192.168.0.244:3000/api/report');
     return {
         props: {
             report,

@@ -48,7 +48,7 @@ const categories = ({products}) => {
 
 export const getServerSideProps = async(context) =>{
     const {name} = context.query
-    const {data:products} =await axios.get('http://192.168.0.8:3000/api/categoriesList',{ params: { name: name } });
+    const {data:products} =await axios.get('http://192.168.0.244:3000/api/categoriesList',{ params: { name: name } });
     return{
       props:{
         products,

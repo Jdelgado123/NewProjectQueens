@@ -14,7 +14,7 @@ const diskStorage = multer.diskStorage({
 
 const fileUpload = multer({
     storage:diskStorage
-}).single('imagen')
+}).any('imagen',10)
 
 
 
@@ -28,9 +28,10 @@ router.get('/asas',async(req,res)=>{
 router.post('/images/post',fileUpload,async(req,res)=>{
     const {name,description,price,stock,barcode,category,subcategory,location,currency} = req.body
 
-    const name_img = req.file.filename
+    const name_img = req.file
     console.log(req.body)
-    const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img,location,currency})
+    console.log(req.files)
+    const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img:"aea.jpg",location,currency})
     console.log(result)
     res.status(200).json(req.body)
 })

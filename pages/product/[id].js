@@ -51,7 +51,7 @@ export const getServerSideProps = async (context) => {
   const { query } = context
   const { id } = query
   const aea = { idbody: id }
-  const { data: product } = await axios.post('http://192.168.0.8:3000/api/uproduct', aea);
+  const { data: product } = await axios.post('http://192.168.0.244:3000/api/uproduct', aea);
   return {
     props: {
       product,

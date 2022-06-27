@@ -9,6 +9,8 @@ const Formproduct = ({ category }) => {
   const [file, setFile] = useState(null)
   const [aarray, setArray] = useState(null)
   const [currency,setCurrency] = useState("")
+  
+   
 
   useEffect(() => {
     async function fa() {
@@ -27,7 +29,6 @@ const Formproduct = ({ category }) => {
   })
 
   const statefile = (e) => {
-    setFile(e.target.files[0])
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () =>{
@@ -61,7 +62,13 @@ const Formproduct = ({ category }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const fd = new FormData()
-    fd.append('imagen', file),
+    const files = document.querySelector('#img').files
+    
+    if(files.length != 0){
+      for (const singlefile of files){
+        fd.append('imagen',singlefile)
+      }
+    }
       fd.append('name', product.name),
       fd.append('description', product.description),
       fd.append('price', product.price),
@@ -71,10 +78,12 @@ const Formproduct = ({ category }) => {
       fd.append('subcategory', subcate),
       fd.append('location', product.location.toUpperCase()),
       fd.append('currency', currency)
-    fetch(`http://192.168.0.8:3000/images/post`, {
+    fetch(`http://192.168.0.244:3000/images/post`, {
       method: 'POST',
       body: fd
     }).then(res => res.text()).catch(err => console.error(err))
+
+    console.log(fd)
 
     document.getElementById('name').value = null
     document.getElementById('description').value = null
