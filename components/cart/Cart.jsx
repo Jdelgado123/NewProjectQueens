@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import Image from 'next/image';
+import axios from 'axios'
 
 import { useStateContext } from '../../context/StateContext';
 
@@ -11,13 +12,18 @@ const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
 
+  const sendRequired = async (cartItems) => {
+
+    await axios.post('/api/teller', cartItems)
+
+  }
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
         <button
-        type="button"
-        className="cart-heading"
-        onClick={() => setShowCart(false)}>
+          type="button"
+          className="cart-heading"
+          onClick={() => setShowCart(false)}>
           <AiOutlineLeft />
           <span className="heading">Tu carrito</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
@@ -25,8 +31,8 @@ const Cart = () => {
 
         {cartItems.length < 1 && (
           <div className="empty-cart">
-            <div className='items-center content-center justify-center'><AiOutlineShopping size={150}/></div>
-            <h3>Tu carrito esta vacío </h3>
+
+            <h3 className='p-12'>Tu carrito esta vacío </h3>
             <Link href="/">
               <button
                 type="button"
@@ -42,7 +48,7 @@ const Cart = () => {
         <div className="product-container">
           {cartItems.length >= 1 && cartItems.map((item) => (
             <div className="product" key={item.id_product}>
-              <Image src={"/img/imagen1.jpg"} className="cart-product-image" width={375} height={290} alt="..."/>
+              <Image src={"/imagesServer2/"+item.name_img} className="cart-product-image" width={375} height={290} alt="..." />
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
@@ -50,14 +56,16 @@ const Cart = () => {
                 </div>
                 <div className="flex bottom">
                   <div>
-                  <p className="quantity-desc">
-                    <span className="minus" onClick={() => toggleCartItemQuanitity(item.id_product, 'dec') }>
-                    <AiOutlineMinus />
-                    </span>
-                    <span className="num">{item.quantity}</span>
-                    <span className="plus" onClick={() => toggleCartItemQuanitity(item.id_product, 'inc') }><AiOutlinePlus /></span>
-                  </p>
+                    <p className="justify-between grid gap-4 grid-cols-3 items-center">
+                      <span className="text-red-500/100" onClick={() => toggleCartItemQuanitity(item.id_product, 'dec')}>
+                        <AiOutlineMinus />
+                      </span>
+                      <span className="num">{item.quantity}</span>
+                      <span className="text-green-500/100" onClick={() => toggleCartItemQuanitity(item.id_product, 'inc')}><AiOutlinePlus /></span>
+                    </p>
                   </div>
+
+                  
                   <button
                     type="button"
                     className="remove-item"
@@ -77,11 +85,11 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="buttons">
-              <a href= {`https://wa.me/51986775834?text=El%20carrito%20tiene%20${totalPrice}%20de%20valor,%20lista%20de%20compras${cartItems.map((item)=>("%0AObjeto:"+item.name+"  Precio Unitario:"+item.price+" Cantidad:"+item.quantity+"%0A"))}`} rel='noreferrer' target="_blank">
-              <button type="button" className="buy-now">
-                Pagar Ahora
-              </button>
-              </a>
+              <Link href={'/succes'}>
+                <button type="button" className="buy-now" onClick={() => sendRequired(cartItems)}>
+                  Realizar pedido
+                </button>
+              </Link>
             </div>
           </div>
         )}
@@ -91,3 +99,13 @@ const Cart = () => {
 }
 
 export default Cart
+
+/* 
+
+<a href= {`https://wa.me/51986775834?text=El%20carrito%20tiene%20${totalPrice}%20de%20valor,%20lista%20de%20compras${cartItems.map((item)=>("%0AObjeto:"+item.name+"  Precio Unitario:"+item.price+" Cantidad:"+item.quantity+"%0A"))}`} rel='noreferrer' target="_blank">
+              <button type="button" className="buy-now">
+                Pagar Ahora
+              </button>
+              </a>
+
+*/

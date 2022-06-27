@@ -4,7 +4,7 @@ const db = createPool.createPool({
     host:'localhost',
     user:'root',
     password:'',
-    database:'queensdb'
+    database:'queensdb',
 })
 
 module.exports=db

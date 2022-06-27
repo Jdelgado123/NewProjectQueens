@@ -51,7 +51,7 @@
   background-color: transparent;
 }
 .cart-main{
-  font-size:40px;
+  font-size:35px;
 }
 .cart-icon:hover{
   transform: scale(1.1,1.1);
@@ -542,6 +542,9 @@ padding: 30px 65px;
   .desc{
    bottom: 60px;
   }
+  .cart-main{
+    font-size: 50px;
+  }
   .product-detail-container{
     flex-wrap: wrap;
     }
@@ -550,8 +553,8 @@ padding: 30px 65px;
     height: 350px;
   }
   .cart-container{
-    width: 415px;
-  padding: 4px;
+    width: 375px;
+  padding: 6px;
   }
   .cart-heading{
     margin-top: 35px;
@@ -626,6 +629,8 @@ padding: 30px 65px;
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap" rel="stylesheet');
+
 * {
     margin: 0;
     padding: 0;
@@ -659,9 +664,27 @@ html{
     display: none;
 }
 
+.ishared{
+  width: 23px;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  right: 5%;
+  font-size: 20px;
+  color: black;
+}
+
+.ishared-color{
+  color: black;
+}
+
+.ishared-color:hover{
+  color: white;
+}
+
 body{
-    /*font-family: 'Poppins', sans-serif;
-    background: var(--color-bg);
+  /*font-family: 'Bebas Neue', cursive;
+    
     
     line-height: 1.7;
     /*background-image: url(../src/assets/wenjuinn-png-claw-machine-small.jpg);*/
