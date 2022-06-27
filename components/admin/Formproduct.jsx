@@ -26,8 +26,16 @@ const Formproduct = ({ category }) => {
     barcode: "",
   })
 
-  const statefile = e => {
+  const statefile = (e) => {
     setFile(e.target.files[0])
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () =>{
+      let preview = document.querySelector('#previewImage');
+      let imagen = document.createElement('img');
+      imagen.src = reader.result;
+      preview.append(imagen);
+    }
   }
 
   const preventEnter = () => {
@@ -127,7 +135,8 @@ const Formproduct = ({ category }) => {
         </select>
 
         <label htmlFor="imagen" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen:</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="img" type="file" name="img" onChange={statefile} />
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" multiple id="img" type="file" name="img" onChange={statefile} />
+        <div id='previewImage' className="block text-gray-700 dark:text-white text-sm font-bold mb-2"></div>
         <div className='pt-6'>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Crear Producto</button>
         </div>
