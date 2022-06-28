@@ -35,7 +35,7 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     console.log(jsonname)
     console.log(req.body)
     console.log(req.files)
-    const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img:'{"aea.jpg":"asda"}',location,currency})
+    const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
     console.log(result)
     res.status(200).json(req.body)
 })
