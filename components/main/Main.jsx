@@ -13,7 +13,7 @@ const Main = ({ products }) => {
           <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center justify-center object-center'>
           
             <Link href={`/product/${product.id_product}`}>
-              <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img} width={375} height={290} alt="product image" />
+              <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img.toString()} width={375} height={290} alt="product image" />
             </Link>
             {(product.stock==0)?<div className='absolute bottom-0 rounded-br-lg right-0 bg-rose-400 border-solid border-red-700 border-1'><h1 className='text-3xl text-white '>AGOTADO</h1></div>:null}
           </div>
