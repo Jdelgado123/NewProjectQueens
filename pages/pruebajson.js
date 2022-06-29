@@ -3,8 +3,6 @@ import db from '../config/db'
 import Image from 'next/image'
 
 export default function pruebajson ({result}) {
-    const ga =JSON.parse(result[0].json)
-
     const ff = "adadada"
     console.log(ff)
     const tt = JSON.stringify(ff)

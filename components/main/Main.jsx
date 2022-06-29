@@ -10,12 +10,12 @@ const Main = ({ products }) => {
       {products.map((product, index) => (
         <div key={index} className="border border-solid border-blue-700/100 max-w-sm bg-white rounded-lg shadow-xl">
           <div className='p-5 shadow-xl roundend-lg'>
-          <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center justify-center object-center'>
+          <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center justify-center object-center overflow-hidden'>
           
             <Link href={`/product/${product.id_product}`}>
-              <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img.toString()} width={375} height={290} alt="product image" />
+              <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img.replace(/['"]+/g, '')} width={375} height={290} alt="product image" />
             </Link>
-            {(product.stock==0)?<div className='absolute bottom-0 rounded-br-lg right-0 bg-rose-400 border-solid border-red-700 border-1'><h1 className='text-3xl text-white '>AGOTADO</h1></div>:null}
+            {(product.stock==0)?<div className='absolute bottom-0 -mr-12 mb-4 rounded-br-lg right-0 bg-red-500 border-solid border-1 -rotate-45 whitespace-nowrap px-4 text-base w-36 h-8 text-center text-white'>AGOTADO</div>:null}
           </div>
           </div>
           <div className="pb-5 items-center justify-center content-center" >

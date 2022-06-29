@@ -61,7 +61,7 @@ const DeleteProduct = () => {
 
                                     {(datos === null) ? null : datos.map((item, index) => (
                                         <div className="flex flex-col items-center p-8 transition-colors duration-200 transform cursor-pointer group hover:bg-blue-600 rounded-xl" key={index}>
-                                            <Image src={'/imagesServer2/' + item.name_img} className="object-cover aspect-video w-32 h-32 rounded-full ring-4 ring-gray-300" alt="..." width={450} height={450} objectFit='cover' />
+                                            <Image src={'/imagesServer2/' + item.name_img.replace(/['"]+/g, '')} className="object-cover aspect-video w-32 h-32 rounded-full ring-4 ring-gray-300" alt="..." width={450} height={450} objectFit='cover' />
 
                                             <h1 className="mt-4 text-2xl font-serif text-gray-700 capitalize dark:text-white group-hover:text-white">{item.name}</h1>
 

@@ -13,13 +13,13 @@ async function handler(req, res) {
 }
 
 const getProducts = async (req, res) => {
-    const [result] = await db.query("SELECT id_product,name,description,price,stock,barcode,name_img,currency FROM products");
+    const [result] = await db.query("SELECT id_product,name,description,price,stock,barcode,JSON_EXTRACT(name_img,'$[0]') as name_img,currency FROM products");
     return res.status(200).json(result)
 }
 
 const postProducts = async (req,res) =>{
     const {name} = req.body
-    const [result] = await db.query(`SELECT * FROM products WHERE name LIKE '${name}%'`)
+    const [result] = await db.query(`SELECT *,JSON_EXTRACT(name_img,'$[0]') as name_img FROM products WHERE name LIKE '${name}%'`)
 
     return res.status(200).json(result)
 }

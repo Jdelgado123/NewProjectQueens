@@ -15,7 +15,7 @@ async function handler(req, res) {
 const getCategories = async(req,res)=>{
 
     const {name} = req.query
-    const [result] = await db.query("SELECT products.name,products.id_product,products.currency,products.price,products.name_img FROM products INNER JOIN category ON products.id_category = category.id_category WHERE category.name=?",[name]);
+    const [result] = await db.query("SELECT *,products.name ,JSON_EXTRACT(name_img,'$[0]') as name_img FROM products INNER JOIN category ON products.id_category = category.id_category WHERE category.name=?",[name]);
     return res.status(200).json(result)
 }
 

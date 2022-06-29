@@ -4,11 +4,11 @@ export default function Layout({children}) {
   return (
     <div className="grid">
     <Navbar></Navbar>
-    <div className="bg-gray p-5">
-        <div className="container mx-auto h-full">
+    
+        <div className="container m-auto h-full p-5">
             {children}
         </div>
-    </div>
+    
     
     </div>
   )

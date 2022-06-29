@@ -26,7 +26,7 @@ const getProducts = async(req,res) => {
 
 const postProducts=async(req, res) =>{
     const {idbody} = req.body
-    const [result] = await db.query("SELECT * FROM products WHERE id_product=?",[idbody]);
+    const [result] = await db.query("SELECT *, JSON_EXTRACT(name_img,'$') as name_img FROM products WHERE id_product=?",[idbody]);
     return res.status(200).json(result)
 }
 
