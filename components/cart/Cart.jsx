@@ -13,7 +13,7 @@ const Cart = () => {
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
 
   const sendRequired = async (cartItems) => {
-
+    console.log(cartItems)
     await axios.post('/api/teller', cartItems)
 
   }
@@ -85,11 +85,11 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="buttons">
-              <Link href={'/succes'}>
+              
                 <button type="button" className="buy-now" onClick={() => sendRequired(cartItems)}>
                   Realizar pedido
                 </button>
-              </Link>
+              
             </div>
           </div>
         )}

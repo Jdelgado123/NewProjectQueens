@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { useState, useEffect } from 'react'
+import {TiThLarge} from 'react-icons/ti'
 
 
 const Formproduct = ({ category }) => {
@@ -152,19 +153,20 @@ const Formproduct = ({ category }) => {
   return (
     <div className='w-full max-w-xs'>
       <form id='formPost' onChange={preventEnter} className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 grid" onSubmit={handleSubmit}>
-        <h5 className="text-xl font-medium text-gray-900 dark:text-white">Creacion de productos</h5>
+        
+        <div className='grid grid-cols-2 justify-between'>
+          <h5 className="text-xl font-medium text-gray-900 dark:text-white">Creacion de productos</h5>
+          <div className='justify-end items-end grid'>
+            <button type="button" className="w-4 text-2xl " onClick={() => togleModal()}><TiThLarge></TiThLarge></button>
+          </div>
+        </div>
+
         <label htmlFor="name" className="block text-gray-700 dark:text-white text-sm font-bold mb-2 pt-6">Producto:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="name" type="text" name='name' onChange={handleChange} required />
         <label htmlFor="description" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Descripción:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="description" type="text" name='description' rows="2" onChange={handleChange} />
         <label htmlFor="price" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Precio:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="price" type="number" name='price' onChange={handleChange} required />
-
-
-
-        <div className="buttons pl-6">
-          <button type="button" className="add-to-cart" onClick={() => togleModal()}>Agregar Talla</button>
-        </div>
 
 
         <div id="modal" tabIndex="-1" className="hidden overflow-y-auto overflow-x-visible fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">

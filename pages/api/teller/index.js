@@ -1,4 +1,5 @@
 const db=require('../../../config/db')
+import {useStateContext} from '../../../context/StateContext'
 
 async function handler(req, res) {
 
@@ -19,20 +20,20 @@ const getTeller = async(req,res)=>{
     //return res.status(200).json(result)
 }
 
-const postTeller = async(req,res)=>{
+ async function postTeller(req,res){
+    const {size} = useStateContext()
+
     const array = req.body
     console.log(array)
 
     const [result] = await db.query("INSERT INTO required SET ?",{total_cost:250})
-    console.log(result)
+    console.log(size)
     
     array.map(async(item)=>{
         const rest = item.stock-item.quantity
         const [update] = await db.query("UPDATE products SET stock=? WHERE id_product=?",[rest,item.id_product])
         const [todoChevere] = await db.query("INSERT INTO products_required SET ?",{id_required:result.insertId,id_product:item.id_product,stock:item.quantity})
         
-        console.log(update)
-        console.log(todoChevere)
     });
 }
 
