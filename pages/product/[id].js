@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import db from '../../config/db'
@@ -10,18 +11,20 @@ import toast, { Toaster } from 'react-hot-toast'
 function producDetails({ product, result }) {
   const [index, setIndex] = useState(0);
   const [stocks,setStocks] = useState(0);
+  const [iclick,setIclick] = useState(0);
   
-  const { decQty, incQty, qty, onAdd,setSize } = useStateContext();
+  const { decQty, incQty, qty, onAdd,setQty } = useStateContext();
   const images = JSON.parse(product[0].name_img)
 
   useEffect(()=>{
     setStocks(product[0].stock)
+    setQty(1)
   },[])
 
-  const changeStockbySize = (stock,value) =>{
+  const changeStockbySize = (stock,value,i) =>{
     setStocks(stock)
-    product.push(value)
-    console.log(product)
+    setIclick(i)
+    product[0].sizename = value
   }
 
   return (
@@ -65,7 +68,7 @@ function producDetails({ product, result }) {
             <h3 className='pt-8'>Stock Disponible:</h3>
             <p>{stocks}</p>
             <div className="buttons-size">
-              {(result.length ==0)?undefined:result.map((item,index)=>(<button type="button" className="add-to-size" key={index} onClick={()=>changeStockbySize(item.stock,item.sizename)}>{item.sizename}</button>))}
+              {(result.length ==0)?undefined:result.map((item,i)=>(<button type="button" className={i === iclick ? "add-to-size selected-image": "add-to-size"} key={i} onClick={()=>changeStockbySize(item.stock,item.sizename,i)}>{item.sizename}</button>))}
             </div>
             <div className="buttons">
               <button type="button" className="add-to-cart" onClick={() => onAdd(product[0], qty)}>Agregar al Carrito</button>

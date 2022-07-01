@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import toast,{ Toaster } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import {TiThLarge} from 'react-icons/ti'
 
@@ -19,6 +20,7 @@ const Formproduct = ({ category }) => {
     async function fa() {
       const { data } = await axios.get('/api/subcategories', { params: { id: categor } })
       setArray(data)
+      
     }
     fa()
   }, [categor])
@@ -102,6 +104,7 @@ const Formproduct = ({ category }) => {
     document.getElementById('location').value = null
     document.getElementById('currency').value = null
     document.getElementById('sub_category').value = null
+    document.getElementById('stock').removeAttribute("readOnly")
   }
 
 
@@ -125,7 +128,7 @@ const Formproduct = ({ category }) => {
 
     tallas.push(gg)
 
-
+    toast.success("Talla agregada correctamente")
 
     size_name.value = ""
     size_stock.value = ""
@@ -146,6 +149,7 @@ const Formproduct = ({ category }) => {
     stockbysize.value = SumatotalSize
     cambiarTallas(tallas)
     togleModal()
+    document.getElementById('stock').setAttribute("readOnly","readOnly")
   }
 
 
@@ -170,6 +174,7 @@ const Formproduct = ({ category }) => {
 
 
         <div id="modal" tabIndex="-1" className="hidden overflow-y-auto overflow-x-visible fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">
+        <div><Toaster></Toaster></div>
           <div className='fixed inset-0 bg-gray-700 bg-opacity-70'></div>
 
           <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
@@ -213,7 +218,7 @@ const Formproduct = ({ category }) => {
         </div>
 
         <label htmlFor="stock" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Cantidad:</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="stock" type="number" name='stock' onChange={handleChange} required />
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="stock" type="number" name='stock' onChange={handleChange} required/>
 
         <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
         <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
@@ -244,7 +249,7 @@ const Formproduct = ({ category }) => {
         </select>
 
         <label htmlFor="imagen" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen:</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" multiple id="img" type="file" name="img" onChange={statefile} />
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" multiple id="img" type="file" name="img"/>
         <div id='previewImage' className="block text-gray-700 dark:text-white text-sm font-bold mb-2"></div>
         <div className='pt-6'>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Crear Producto</button>
