@@ -157,8 +157,16 @@ const Formproduct = ({ category }) => {
     document.getElementById('stock').setAttribute("readOnly", "readOnly")
   }
 
-  const CreateSubcategoria = ()=>{
+  const CreateSubcategoria = async()=>{
+    const subcategoria_name = document.querySelector('#subcategoria_name').value
+    const create_description = document.querySelector('#create_description').value
+    const create_category = document.querySelector('#create_category').value
 
+    const dataCreate = {name: subcategoria_name, description: create_description, category: create_category} 
+    const { data } = await axios.post('/api/subcategories',dataCreate)
+
+    console.log(data)
+  
   }
 
 
@@ -216,7 +224,7 @@ const Formproduct = ({ category }) => {
                   <div className="mb-6">
 
                     <label htmlFor="create_category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
-                    <select id="Create_category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
+                    <select id="create_category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
                       <option value="null">Seleccione categoria</option>
                       {category.map((cat, index) => (
                         <option key={index} value={cat.id_category}>{cat.name}</option>

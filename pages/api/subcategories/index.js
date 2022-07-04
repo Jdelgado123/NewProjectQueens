@@ -19,7 +19,9 @@ const getSubCategories = async(req,res)=>{
 }
 
 const postSubCategories = async(req,res)=>{
-    const [result] = await db.query("SELECT * FROM subcategory");
+    const {name,description, category} = req.body
+    const [result] = await db.query("INSERT INTO subcategory (name, description_subcategory, id_category) VALUES (?, ?,?)",[name,description,category]);
+    console.log(result);
     return res.status(200).json(result)
 }
 
