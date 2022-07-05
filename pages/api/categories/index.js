@@ -7,7 +7,7 @@ async function handler2(req, res) {
             return await getCategories(req,res)
     
         case "POST":
-            return console.log("aea post de mrd")
+            return await postCategories(req,res)
     }
   
 }
@@ -15,6 +15,12 @@ async function handler2(req, res) {
 const getCategories = async(req,res)=>{
     const [result] = await db.query("SELECT * FROM category");
     return res.status(200).json(result)
+}
+
+const postCategories = async(req,res)=>{
+    const {name,description_category} = req.body
+    const [result] = await db.query("INSERT INTO category (name, description_category) VALUES (?, ?)",[name,description_category]);
+    console.log(result)
 }
 
 export default handler2;
