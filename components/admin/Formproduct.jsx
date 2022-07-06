@@ -167,7 +167,12 @@ const Formproduct = ({ category }) => {
     const create_category = document.querySelector('#create_category')
 
     const dataCreate = { name: subcategoria_name.value, description: create_description.value, category: create_category.value }
-    const { data } = await axios.post('/api/subcategories', dataCreate)
+
+    subcategoria_name.value = null
+    create_category.value = null
+    create_description.value = null
+
+    await axios.post('/api/subcategories', dataCreate)
 
   }
 
@@ -176,10 +181,14 @@ const Formproduct = ({ category }) => {
     const description_category = document.querySelector('#category_description')
 
 
-    const dataCreates = { name: category_name.value, description_category:description_category.value }
-    const { data } = await axios.post('/api/categories', dataCreates)
-  
+    const dataCreate = { name: category_name.value, description_category:description_category.value }
 
+    document.getElementById('category_name').value = null
+    document.getElementById('category_description').value = null
+
+    await axios.post('/api/categories', dataCreate)
+  
+    
   }
 
 
@@ -234,18 +243,7 @@ const Formproduct = ({ category }) => {
                     </label>
                     <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category_description" type="text" placeholder="No es necesario llenar el campo" />
                   </div>
-                  <div className="mb-6">
-
-                    <label htmlFor="create_category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
-                    <select id="create_category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
-                      <option value="null">Seleccione categoria</option>
-                      {category.map((cat, index) => (
-                        <option key={index} value={cat.id_category}>{cat.name}</option>
-                      ))}
-                    </select>
-
-                  </div>
-
+                  
                   <div className="flex items-center justify-between">
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() =>CreateCategory()}>
                       Crear

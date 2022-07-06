@@ -10,7 +10,7 @@ const Main = ({ products }) => {
       {products.map((product, index) => (
         <div key={index} className="border border-solid border-blue-700/100 max-w-sm bg-white rounded-lg shadow-xl">
           <div className='p-5 shadow-xl roundend-lg'>
-          <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center justify-center object-center overflow-hidden'>
+          <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300 items-center content-center overflow-hidden'>
           
             <Link href={`/product/${product.id_product}`}>
               <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img.replace(/['"]+/g, '')} width={375} height={290} alt="product image" />
