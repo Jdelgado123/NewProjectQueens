@@ -36,7 +36,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className="bg-black flex border-gray-200 px-2 sm:px-5 py-2.5 dark:bg-gray-800">
+    <nav className=" bg-black flex border-gray-200 px-2 sm:px-5 py-2.5 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link href={"/"}>
           <a href="#" className="flex items-center">
@@ -78,12 +78,12 @@ const Navbar = () => {
               </button>
 
               <div id="categorias" className="lg:absolute hidden bg-black divide-y divide-gray-100 rounded shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                <ul className="py-1 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                <ul className=" py-1 text-sm text-gray-700 dark:text-gray-400">
 
                   {(datos === null) ? undefined : datos.map((item, index) => (
-                    <li key={index}>
-                      <Link href={`/categories/${item.name}`}>
-                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onClick={()=>aea()}>{item.name}</a>
+                    <li key={index} onClick={()=>document.querySelector('#categorias').classList.toggle('hidden')}>
+                      <Link href={`/categories/${item.name}`} >
+                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white " onClick={()=>aea()}>{item.name}</a>
                       </Link>
                     </li>
                   ))}

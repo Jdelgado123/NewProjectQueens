@@ -13,8 +13,10 @@ const Cart = () => {
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
 
   const sendRequired = async (cartItems) => {
+    
+    cartItems.totalPrice= totalPrice
     console.log(cartItems)
-    await axios.post('/api/teller', cartItems)
+    await axios.post('/api/teller', {cartItems,totalPrice})
 
   }
   return (
@@ -57,11 +59,11 @@ const Cart = () => {
                 <div className="flex bottom">
                   <div>
                     <p className="justify-between grid gap-4 grid-cols-3 items-center">
-                      <span className="text-red-500/100" onClick={() => toggleCartItemQuanitity(item.id_product, 'dec')}>
+                      <span className="text-red-500/100" onClick={() => toggleCartItemQuanitity(item, 'dec')}>
                         <AiOutlineMinus />
                       </span>
                       <span className="num">{item.quantity}</span>
-                      <span className="text-green-500/100" onClick={() => toggleCartItemQuanitity(item.id_product, 'inc')}><AiOutlinePlus /></span>
+                      <span className="text-green-500/100" onClick={() => toggleCartItemQuanitity(item, 'inc')}><AiOutlinePlus /></span>
                     </p>
                   </div>
 

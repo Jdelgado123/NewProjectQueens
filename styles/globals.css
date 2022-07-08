@@ -50,8 +50,13 @@
   border: none;
   background-color: transparent;
 }
+
 .cart-main{
   font-size:35px;
+}
+
+.cart-main:hover{
+  transform: scale(1.03,1.03);
 }
 .cart-icon:hover{
   transform: scale(1.1,1.1);

@@ -21,9 +21,11 @@ const getTeller = async (req, res) => {
 
 async function postTeller(req, res) {
 
-    const array = req.body
+    const array = req.body.cartItems
 
-    const [result] = await db.query("INSERT INTO required SET ?", { total_cost: 250 })
+    const totalPrice = req.body.totalPrice
+
+    const [result] = await db.query("INSERT INTO required SET ?", { total_cost: totalPrice })
 
     array.map(async (item) => {
         const keys = Object.keys(item)

@@ -19,8 +19,15 @@ export const StateContext = ({ children }) => {
             (item) => item.id_product === product.id_product
         )
 
-        setTotalPrice((prev) => prev + product.price * quantity)
-        setTotalQuantities((prev) => prev + quantity)
+        console.log(product)
+        if (product.currency == "USD"){
+            setTotalPrice((prev) => (prev + product.price * quantity) * 3.82)
+            setTotalQuantities((prev) => prev + quantity)
+        }else{
+            setTotalPrice((prev) => prev + product.price * quantity)
+            setTotalQuantities((prev) => prev + quantity)
+        }
+        
 
         if (checkProductInCart) {
             const updatedCartItems = cartItems.map((cartProduct) => {
@@ -46,27 +53,37 @@ export const StateContext = ({ children }) => {
         foundProduct = cartItems.find((item) => item.id_product === product.id_product);
         const newCartItems = cartItems.filter((item) => item.id_product !== product.id_product);
 
-        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity);
+        if(product.currency == "USD"){
+            setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity * 3.82);
+        }else{
+            setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity);
+        }
+        
         setTotalQuantities(prevTotalQuantities => prevTotalQuantities - foundProduct.quantity);
         setCartItems(newCartItems);
     }
 
-    const toggleCartItemQuanitity = (id, value) => {
-        foundProduct = cartItems.find((item) => item.id_product === id)
-        index = cartItems.findIndex((product) => product.id_product === id);
-        const newCartItems = cartItems.filter((item) => item.id_product !== id)
+    const toggleCartItemQuanitity = (datos, value) => {
+
+        console.log(datos)
+        foundProduct = cartItems.find((item) => item.id_product === datos.id_product)
+        index = cartItems.findIndex((product) => product.id_product === datos.id_product);
+        const newCartItems = cartItems.filter((item) => item.id_product !== datos.id_product)
+        
+        console.log(newCartItems)
+        console.log(foundProduct)
 
         if (value === 'inc') {
             setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 }]);
 
-            setTotalPrice((prevTotalPrice) => parseInt(prevTotalPrice) + parseInt(foundProduct.price))
-
+            (datos.currency === "USD") ? setTotalPrice((prevTotalPrice) => parseFloat(prevTotalPrice) + (parseFloat(foundProduct.price)) * 3.82) : setTotalPrice((prevTotalPrice) => parseFloat(prevTotalPrice) + parseFloat(foundProduct.price))
+            
             setTotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if (value === 'dec') {
             if (foundProduct.quantity > 1) {
                 setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1 }]);
 
-                setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price)
+                (datos.currency === "USD") ? setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * 3.82) : setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price)
 
                 setTotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
             }
