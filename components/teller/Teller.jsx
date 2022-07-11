@@ -10,6 +10,7 @@ const Teller = () => {
   const [dat, setDat] = useState(null)
   const [faa, setFaa] = useState(null)
 
+  const [costTotal, setCostTotal] = useState(null)
   useEffect(() => {
     async function ga() {
       const { data } = await axios.get('/api/requires')
@@ -27,6 +28,11 @@ const Teller = () => {
   const togleModal = async (id) => {
     const { data } = await axios.post('/api/requires', { id: id })
     setFaa(data)
+    setCostTotal(data[0].total_cost)
+    togleModalx()
+  }
+
+  const togleModalx = () =>{
     document.querySelector('#modal').classList.toggle('hidden')
   }
   return (
@@ -76,7 +82,7 @@ const Teller = () => {
                   <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                     Pedido
                   </h3>
-                  <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="extralarge-modal" onClick={() => togleModal()}>
+                  <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="extralarge-modal" onClick={() => togleModalx()}>
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                   </button>
                 </div>
@@ -90,7 +96,7 @@ const Teller = () => {
 
                         {(faa === null) ? null : faa.map((product, index) => (
                           <div className="flex items-center gap-4 p-4" key={index}>
-                            <Image src={'/imagesServer2/' + product.name_img} width={400} height={400} alt="..." objectFit="revert" className='aspect-video object-cover' />
+                            <Image src={'/imagesServer2/' + product.name_img.replace(/['"]+/g, '')} width={400} height={400} alt="..." objectFit="revert" className='aspect-video object-cover' />
                             <div className="flex flex-col">
                               <strong className="text-slate-900 text-sm font-medium dark:text-slate-200">{product.name}</strong>
                               <div className='flex items-center gap-2 w-52'>
@@ -128,7 +134,7 @@ const Teller = () => {
                           </table>
                           <div className='text-center grid grid-cols-2'>
                             <h3 className='text-3xl font-bold text-red-800'>TOTAL:</h3>
-                            <h3 className='text-3xl'>S/.250</h3>
+                            <h3 className='text-3xl'>{costTotal}</h3>
                           </div>
                           <div className="pl-20">
                           <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:text-red  '>Imprimir</button>
@@ -142,7 +148,7 @@ const Teller = () => {
 
                 <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                   <button data-modal-toggle="extralarge-modal" type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">LISTO</button>
-                  <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">CERRAR</button>
+                  <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" onClick={()=> togleModalx()}>CERRAR</button>
                 </div>
               </div>
             </div>

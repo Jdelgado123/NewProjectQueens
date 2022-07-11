@@ -2,17 +2,17 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
-import Navbar from '../navbar/Navbar'
 
 const Main = ({ products }) => {
 
   return (
 
     <div className='grid gap-6 grid-cols-1 md:grid-cols-3 items-center justify-between'>
+      
       {products.map((product, index) => (
         <div key={index} className="border border-solid border-blue-700/100 max-w-sm bg-white rounded-lg shadow-xl">
           <div className='p-5 shadow-xl roundend-lg'>
-            <div className='border-2 p-1 border-solid rounded-2xl border-rose-300  overflow-hidden'>
+            <div className='relative border-2 p-1 border-solid rounded-2xl border-rose-300  overflow-hidden'>
               
                 <Image className="pl-2 rounded-t-lg " src={"/imagesServer2/" + product.name_img.replace(/['"]+/g, '')} width={375} height={290} alt="product image" />
               
@@ -41,6 +41,8 @@ const Main = ({ products }) => {
           </div>
         </div>
       ))}
+      
+      
     </div>
 
   )

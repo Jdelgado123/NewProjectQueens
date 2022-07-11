@@ -6,13 +6,14 @@ import { TiThLarge } from 'react-icons/ti'
 import { ImPlus } from 'react-icons/im'
 
 
-const Formproduct = ({ category }) => {
+const Formproduct = () => {
   const [categor, setCategor] = useState("")
   const [subcate, setSubcate] = useState("")
   const [file, setFile] = useState(null)
   const [aarray, setArray] = useState(null)
   const [currency, setCurrency] = useState("")
   const [tallass, setTallass] = useState(null)
+  const [arraycategory,setArraycategory] = useState([])
 
   const tallas = []
   const SumatotalSize = 0
@@ -35,16 +36,10 @@ const Formproduct = ({ category }) => {
     barcode: "",
   })
 
-  /*const statefile = (e) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      let preview = document.querySelector('#previewImage');
-      let imagen = document.createElement('img');
-      imagen.src = reader.result;
-      preview.append(imagen);
-    }
-  }*/
+  const getCategory = async() =>{
+    const {data:result} = await axios.get('/api/categories');
+    setArraycategory(result)
+  }
 
   const preventEnter = () => {
     var formPost = document.getElementById('formPost')
@@ -187,8 +182,6 @@ const Formproduct = ({ category }) => {
     document.getElementById('category_description').value = null
 
     await axios.post('/api/categories', dataCreate)
-  
-    
   }
 
 
@@ -294,7 +287,7 @@ const Formproduct = ({ category }) => {
                     <label htmlFor="create_category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
                     <select id="create_category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
                       <option value="null">Seleccione categoria</option>
-                      {category.map((cat, index) => (
+                      {arraycategory.map((cat, index) => (
                         <option key={index} value={cat.id_category}>{cat.name}</option>
                       ))}
                     </select>
@@ -367,9 +360,9 @@ const Formproduct = ({ category }) => {
               <button type="button" className="w-4 text-xs" onClick={() => togleModalCreateCategoria()}><ImPlus></ImPlus></button>
             </div>
           </div>
-          <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
+          <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory} onClick={() => getCategory()}>
             <option value="null">Seleccione categoria</option>
-            {category.map((cat, index) => (
+            {arraycategory.map((cat, index) => (
               <option key={index} value={cat.id_category}>{cat.name}</option>
             ))}
           </select>

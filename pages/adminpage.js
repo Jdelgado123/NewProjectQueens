@@ -2,11 +2,11 @@ import Formproduct from '../components/admin/Formproduct'
 import axios from "axios"
 import Layout from "../components/Layout"
 
-export default function adminpage({category}) {
+export default function adminpage() {
   return (
     <Layout>
     <div className='grid place-items-center'>
-      <Formproduct category={category}/>
+      <Formproduct/>
     </div>
     </Layout>
   )

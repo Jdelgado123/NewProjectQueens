@@ -19,8 +19,9 @@ const getCategories = async(req,res)=>{
 
 const postCategories = async(req,res)=>{
     const {name,description_category} = req.body
-    const [result] = await db.query("INSERT INTO category (name, description_category) VALUES (?, ?)",[name,description_category]);
-    console.log(result)
+    await db.query("INSERT INTO category (name, description_category) VALUES (?, ?)",[name,description_category]);
+    const [result1] = await db.query("SELECT * FROM category");
+    return res.status(200).json(result1)
 }
 
 export default handler2;
