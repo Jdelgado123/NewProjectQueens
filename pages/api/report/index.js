@@ -13,7 +13,8 @@ async function handler(req, res) {
 }
 
 const getReport = async (req, res) => {
-    const [result] = await db.query("SELECT * FROM required WHERE date_request BETWEEN date_add(NOW(), INTERVAL -7 DAY) AND NOW()");
+    const {dias} = req.query
+    const [result] = await db.query("SELECT * FROM required WHERE date_request BETWEEN date_add(NOW(), INTERVAL -? DAY) AND NOW()",[dias]);
     return res.status(200).json(result)
 }
 

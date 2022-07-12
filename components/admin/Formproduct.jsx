@@ -206,7 +206,7 @@ const Formproduct = () => {
 
 
         <div id="modalCategorias" tabIndex="-1" className="hidden overflow-y-auto overflow-x-visible fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">
-          <div><Toaster></Toaster></div>
+          
           <div className='fixed inset-0 bg-gray-700 bg-opacity-70'></div>
 
           <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
@@ -252,7 +252,7 @@ const Formproduct = () => {
 
 
         <div id="modalSubcategorias" tabIndex="-1" className="hidden overflow-y-auto overflow-x-visible fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">
-          <div><Toaster></Toaster></div>
+          
           <div className='fixed inset-0 bg-gray-700 bg-opacity-70'></div>
 
           <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
