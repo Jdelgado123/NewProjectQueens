@@ -2,27 +2,27 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import db from '../../config/db'
-import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineMinus, AiOutlinePlus, AiOutlineShoppingCart } from 'react-icons/ai'
 import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useStateContext } from '../../context/StateContext'
 import toast, { Toaster } from 'react-hot-toast'
-import {valorLocalhost} from "../../utils/globals"
+import { valorLocalhost } from "../../utils/globals"
 
 function producDetails({ product, result }) {
   const [index, setIndex] = useState(0);
-  const [stocks,setStocks] = useState(0);
-  const [iclick,setIclick] = useState(0);
-  
-  const { decQty, incQty, qty, onAdd,setQty } = useStateContext();
+  const [stocks, setStocks] = useState(0);
+  const [iclick, setIclick] = useState(0);
+
+  const { decQty, incQty, qty, onAdd, setQty } = useStateContext();
   const images = JSON.parse(product[0].name_img)
 
-  useEffect(()=>{
+  useEffect(() => {
     setStocks(product[0].stock)
     setQty(1)
-  },[])
+  }, [])
 
-  const changeStockbySize = (stock,value,i) =>{
+  const changeStockbySize = (stock, value, i) => {
     setStocks(stock)
     setIclick(i)
     product[0].sizename = value
@@ -39,15 +39,17 @@ function producDetails({ product, result }) {
             </div>
             <div className="small-images-container">
               {images.map((item, i) => (
+
                 <Image
                   key={i}
                   src={"/imagesServer2/" + item}
-                  className={i === index ? 'small-image selected-image' : 'small-image'}
+                  className={i === index ? 'small-image selected-image ' : 'small-image '}
                   onMouseEnter={() => setIndex(i)}
                   width={90}
                   height={95}
                   alt="..."
                 />
+
               ))}
             </div>
           </div>
@@ -69,10 +71,16 @@ function producDetails({ product, result }) {
             <h3 className='pt-8'>Stock Disponible:</h3>
             <p>{stocks}</p>
             <div className="buttons-size">
-              {(result.length ==0)?undefined:result.map((item,i)=>(<button type="button" className={i === iclick ? "add-to-size selected-image": "add-to-size"} key={i} onClick={()=>changeStockbySize(item.stock,item.sizename,i)}>{item.sizename}</button>))}
+              {(result.length == 0) ? undefined : result.map((item, i) => (<button type="button" className={i === iclick ? "add-to-size selected-image" : "add-to-size"} key={i} onClick={() => changeStockbySize(item.stock, item.sizename, i)}>{item.sizename}</button>))}
             </div>
             <div className="buttons">
-              <button type="button" className="add-to-cart" onClick={() => onAdd(product[0], qty)}>Agregar al Carrito</button>
+
+              <div className='cart-main pt-8 content-end flex justify-end pr-3 md:pr-1 sm:pl-8 pb-4  '>
+
+                <a href="#" className="cart-main text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:text-red" onClick={() => onAdd(product[0], qty)}><AiOutlineShoppingCart></AiOutlineShoppingCart></a>
+
+              </div>
+
             </div>
           </div>
         </div>
