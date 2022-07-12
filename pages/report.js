@@ -9,7 +9,7 @@ function report() {
     const [arrayreport,setArrayreport] = useState(null)
 
     const getReport = async(dias) =>{
-       const {data:reports} = await axios.get('http://localhost:3000/api/report',{params:{dias:dias}})
+       const {data:reports} = await axios.get('/api/report',{params:{dias:dias}})
 
         setArrayreport(reports)
     }

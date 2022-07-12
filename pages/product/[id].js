@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useStateContext } from '../../context/StateContext'
 import toast, { Toaster } from 'react-hot-toast'
+import {valorLocalhost} from "../../utils/globals"
 
 function producDetails({ product, result }) {
   const [index, setIndex] = useState(0);
@@ -84,7 +85,7 @@ export const getServerSideProps = async (context) => {
   const { id } = context.query
   const aea = { idbody: id }
 
-  const { data: product } = await axios.post('http://Localhost:3000/api/uproduct', aea);
+  const { data: product } = await axios.post(`http://${valorLocalhost}:3000/api/uproduct`, aea);
 
   const [result] = await db.query(`SELECT * FROM size_product WHERE id_product=${id}`)
 

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { AiOutlineShoppingCart } from 'react-icons/ai'
 import Layout from '../../components/Layout'
+import { valorLocalhost } from '../../utils/globals'
 
 const categories = ({products}) => {
     
@@ -50,7 +51,7 @@ const categories = ({products}) => {
 
 export const getServerSideProps = async(context) =>{
     const {name} = context.query
-    const {data:products} =await axios.get('http://Localhost:3000/api/categoriesList',{ params: { name: name } });
+    const {data:products} =await axios.get(`http://${valorLocalhost}:3000/api/categoriesList`,{ params: { name: name } });
     return{
       props:{
         products,

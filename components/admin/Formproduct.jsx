@@ -4,6 +4,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import { TiThLarge } from 'react-icons/ti'
 import { ImPlus } from 'react-icons/im'
+import { valorLocalhost } from '../../utils/globals'
 
 
 const Formproduct = () => {
@@ -17,7 +18,7 @@ const Formproduct = () => {
 
   const tallas = []
   const SumatotalSize = 0
-
+  console.log(valorLocalhost)
   useEffect(() => {
     async function fa() {
       const { data } = await axios.get('/api/subcategories', { params: { id: categor } })
@@ -84,7 +85,7 @@ const Formproduct = () => {
     fd.append('sizes', JSON.stringify(tallass))
 
 
-    fetch(`http://localhost:3000/images/post`, {
+    fetch(`http://${valorLocalhost}:3000/images/post`, {
       method: 'POST',
       body: fd
     }).then(res => res.text()).catch(err => console.error(err))
