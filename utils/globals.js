@@ -1,3 +1,3 @@
-var localhost = "192.168.0.8";
+var localhost = "localhost";
 
 export const valorLocalhost = localhost
