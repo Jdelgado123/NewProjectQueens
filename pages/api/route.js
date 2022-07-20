@@ -26,7 +26,7 @@ router.get('/asas',async(req,res)=>{
 
 
 router.post('/images/post',fileUpload,async(req,res)=>{
-    const {name,description,price,stock,barcode,category,subcategory,location,currency,sizes} = req.body
+    const {name,description,price,stock,barcode,category,location,currency,sizes} = req.body
 
     const jsonname = []
     const ttt = req.files
@@ -37,11 +37,11 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     const sizesArray = JSON.parse(sizes)
 
     if(sizesArray === null){
-        const result = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
+        const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
         console.log(result)
         res.status(200).json(req.body)
     }else{
-        const [result] = await db.query('INSERT INTO products set ?',{id_category:category,id_subcategory:subcategory,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
+        const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
         sizesArray.map(async(item)=>{
             const insertSize = await db.query('INSERT INTO size_product SET ?',{id_product:result.insertId,sizename:item.size_name,stock:item.size_stock})
             console.log(insertSize)

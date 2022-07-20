@@ -18,8 +18,8 @@ const getCategories = async(req,res)=>{
 }
 
 const postCategories = async(req,res)=>{
-    const {name,description_category} = req.body
-    await db.query("INSERT INTO category (name, description_category) VALUES (?, ?)",[name,description_category]);
+    const {name} = req.body
+    await db.query("INSERT INTO category (name) VALUES (?)",[name]);
     const [result1] = await db.query("SELECT * FROM category");
     return res.status(200).json(result1)
 }
