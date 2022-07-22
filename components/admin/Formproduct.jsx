@@ -2,7 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
-import { TiThLarge } from 'react-icons/ti'
+import { GiAmpleDress } from 'react-icons/gi'
 import { ImPlus } from 'react-icons/im'
 import { valorLocalhost } from '../../utils/globals'
 
@@ -99,7 +99,7 @@ const Formproduct = () => {
     document.getElementById('img').value = null
     document.getElementById('category').value = null
     document.getElementById('location').value = null
-    document.getElementById('currency').value = null
+    document.getElementById('currency').value = 'PEN'
     document.getElementById('stock').removeAttribute("readOnly")
   }
 
@@ -189,13 +189,29 @@ const Formproduct = () => {
       <form id='formPost' onChange={preventEnter} className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-1" onSubmit={handleSubmit}>
 
         <div className='grid grid-cols-2 justify-between'>
-          <h5 className="text-xl font-medium text-gray-900 dark:text-white">Creacion de productos</h5>
+          <h5 className="text-xl font-medium text-gray-900 dark:text-white">Creación de productos</h5>
           <div className='justify-end items-end grid'>
-            <button type="button" className="w-4 text-2xl " onClick={() => togleModal()}><TiThLarge></TiThLarge></button>
+            <button type="button" className="w-4 text-2xl " onClick={() => togleModal()}><GiAmpleDress></GiAmpleDress></button>
           </div>
         </div>
 
-        <label htmlFor="name" className="block text-gray-700 dark:text-white text-sm font-bold mb-2 pt-6">Producto:</label>
+
+        <div className='pt-4'>
+          <div className='grid grid-cols-2'>
+            <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
+            <div className='justify-center'>
+              <button type="button" className="w-4 text-xs" onClick={() => togleModalCreateCategoria()}><ImPlus></ImPlus></button>
+            </div>
+          </div>
+          <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory} onClick={() => getCategory()}>
+            <option value="null">Seleccione categoria</option>
+            {arraycategory.map((cat, index) => (
+              <option key={index} value={cat.id_category}>{cat.name}</option>
+            ))}
+          </select>
+        </div>
+
+        <label htmlFor="name" className="block text-gray-700 dark:text-white text-sm font-bold mb-2 pt-6">Nombre:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="name" type="text" name='name' onChange={handleChange} required />
         <label htmlFor="description" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Descripción:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="description" type="text" name='description' rows="2" onChange={handleChange} />
@@ -208,7 +224,6 @@ const Formproduct = () => {
           <div>
           <label htmlFor="location" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Moneda:</label>
           <select name="currency" id="currency" className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white' onChange={stateCurrency} required>
-            <option value="null">Seleccione el tipo de moneda</option>
             <option value="PEN">Soles</option>
             <option value="USD">Dolares</option>
           </select>
@@ -301,20 +316,7 @@ const Formproduct = () => {
         <label htmlFor="stock" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Cantidad:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="stock" type="number" name='stock' onChange={handleChange} required />
 
-        <div className='pt-3 pb-3'>
-          <div className='grid grid-cols-2'>
-            <label htmlFor="category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
-            <div className='justify-center'>
-              <button type="button" className="w-4 text-xs" onClick={() => togleModalCreateCategoria()}><ImPlus></ImPlus></button>
-            </div>
-          </div>
-          <select id="category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory} onClick={() => getCategory()}>
-            <option value="null">Seleccione categoria</option>
-            {arraycategory.map((cat, index) => (
-              <option key={index} value={cat.id_category}>{cat.name}</option>
-            ))}
-          </select>
-        </div>
+        
 
         <label htmlFor="barcode" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Codigo de barras:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="barcode" type="text" name='barcode' onChange={handleChange} />

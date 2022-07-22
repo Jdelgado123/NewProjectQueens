@@ -35,7 +35,7 @@ function producDetails({ product, result }) {
         <div className="product-detail-container">
           <div>
             <div className="image-container">
-              <Image src={"/imagesServer2/" + images[index]} width={450} height={450} alt="..."></Image>
+              <Image src={"/imagesServer2/" + images[index]} width={350} height={250} alt="..."></Image>
             </div>
             <div className="small-images-container">
               {images.map((item, i) => (
@@ -45,8 +45,8 @@ function producDetails({ product, result }) {
                   src={"/imagesServer2/" + item}
                   className={i === index ? 'small-image selected-image ' : 'small-image '}
                   onMouseEnter={() => setIndex(i)}
-                  width={90}
-                  height={95}
+                  width={80}
+                  height={85}
                   alt="..."
                 />
 
@@ -68,7 +68,7 @@ function producDetails({ product, result }) {
               </p>
             </div>
 
-            <h3 className='pt-8'>Stock Disponible:</h3>
+            <h3 className='pt-6'>Stock Disponible:</h3>
             <p>{stocks}</p>
             <div className="buttons-size">
               {(result.length == 0) ? undefined : result.map((item, i) => (<button type="button" className={i === iclick ? "add-to-size selected-image" : "add-to-size"} key={i} onClick={() => changeStockbySize(item.stock, item.sizename, i)}>{item.sizename}</button>))}
