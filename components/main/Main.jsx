@@ -6,9 +6,12 @@ import Link from 'next/link'
 const Main = ({ products }) => {
 
   const [src,setSrc] = useState('/sssaaaaaa')
+  const [idpr,setIdpr] = useState(0)
 
-  const togleModalImages = (image) => {
+  const togleModalImages = (id,image) => {
     document.querySelector('#modalImages').classList.toggle('hidden')
+
+    setIdpr(id)
 
     setSrc("/imagesServer2/"+image)
   }
@@ -24,7 +27,7 @@ const Main = ({ products }) => {
         <div key={index} className="max-w-sm bg-white shadow-xl">
 
           <div className='relative overflow-hidden'>
-            <Image id={"img" + index} src={"/imagesServer2/" + product.name_img.replace(/['"]+/g, '')} width={375} height={325} alt="product image" onClick={() => togleModalImages(product.name_img.replace(/['"]+/g, ''))} />
+            <Image id={"img" + index} src={"/imagesServer2/" + product.name_img.replace(/['"]+/g, '')} width={375} height={325} alt="product image" onClick={() => togleModalImages(product.id_product,product.name_img.replace(/['"]+/g, ''))} />
             {(product.stock == 0) ? <div className='absolute bottom-0 -mr-12 mb-4 rounded-br-lg right-0 bg-red-500 border-solid border-1 -rotate-45 whitespace-nowrap px-4 text-sm md:text-base w-36 md:w-40 h-6 md:h-8 text-center text-white'>AGOTADO</div> : null}
           </div>
 
@@ -49,8 +52,8 @@ const Main = ({ products }) => {
             <div>
               <Image id='sss' src={src} width={375} height={325} alt="product image"/>
               
-              <Link href={`/product/64`}>
-              <button type="button" className="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">Info</button>
+              <Link href={`/product/${idpr}`}>
+              <button type="button" className="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">Detalles</button>
               </Link>
 
             </div>
