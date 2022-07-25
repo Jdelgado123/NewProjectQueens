@@ -288,7 +288,7 @@ padding: 30px 65px;
 
 .product-detail-container{
   display: flex;
- gap: 40px;
+ gap: 10px;
  margin: 40px;
  margin-top: 60px;
  color: #324d67;
@@ -343,7 +343,7 @@ padding: 30px 65px;
 }
 .product-detail-desc .price{
   font-weight: 700 ;
-  font-size: 26px;
+  font-size: 45px;
   margin-top: 30px;
   color:#f02d34;
 }
@@ -358,7 +358,7 @@ padding: 30px 65px;
   align-items: center;
 }
 .product-detail-desc .buttons{
-  display: flex;
+  
   gap: 30px;
 }
 
@@ -572,6 +572,7 @@ padding: 30px 65px;
   }
   .cart-main{
     font-size: 50px;
+    width: 200px;
   }
   .product-detail-container{
     flex-wrap: wrap;
