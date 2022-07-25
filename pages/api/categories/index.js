@@ -13,7 +13,8 @@ async function handler2(req, res) {
 }
 
 const getCategories = async(req,res)=>{
-    const [result] = await db.query("SELECT * FROM category");
+    const {name} = req.query
+    const [result] = await db.query("SELECT * FROM category WHERE description_category=?",[name]);
     return res.status(200).json(result)
 }
 

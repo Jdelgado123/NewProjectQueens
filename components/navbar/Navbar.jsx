@@ -1,6 +1,5 @@
-import axios from 'axios'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React from 'react'
 import { AiOutlineShopping } from 'react-icons/ai'
 import { useStateContext } from '../../context/StateContext'
 import Cart from '../cart/Cart'
@@ -8,37 +7,16 @@ import Cart from '../cart/Cart'
 
 const Navbar = () => {
   const { showCart, setShowCart, totalQuantities } = useStateContext();
-
-  const [datos, setDatos] = useState(null)
   const aea = () => {
     document.querySelector('#menu').classList.toggle('hidden')
   }
-
-  const categorias = async () => {
-
-    document.querySelector('#categorias').classList.toggle('hidden')
-    const { data } = await axios.get('/api/categories')
-    setDatos(data)
-
-  }
-
-  /*const carga = () =>{
-    let ourElem = document.querySelector('#categorias');
-    document.addEventListener('click',(e)=>{
-      let elementoclick = e.target;
-        if(elementoclick == ourElem){
-          console.log("Esta dentro que rico")
-        }else{
-        document.querySelector('#categorias').classList.toggle('hidden')}
-    })
-  }*/
 
 
 
   return (
     <nav className=" bg-black flex border-gray-200 px-2 sm:px-5 py-2.5 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <Link href={"/categorias"}>
+        <Link href={"/seccion"}>
           <a href="#" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">Zaffari's Boutique</span>
           </a>

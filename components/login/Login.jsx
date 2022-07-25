@@ -27,7 +27,7 @@ const Login = () => {
     if(result.length>0 && result[0].state=='High'){
       router.push('/adminpage')
     }if (result.length>0 && result[0].state=='Low') {
-      router.push('/')
+      router.push('/seccion')
     } else {
       console.log('creedenciales erroneas')
     }
