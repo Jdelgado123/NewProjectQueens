@@ -9,6 +9,8 @@ import { useStateContext } from '../../context/StateContext'
 import toast, { Toaster } from 'react-hot-toast'
 import { valorLocalhost } from "../../utils/globals"
 
+
+let count = 0
 function producDetails({ product, result }) {
   const [index, setIndex] = useState(0);
   const [stocks, setStocks] = useState(0);
@@ -28,7 +30,14 @@ function producDetails({ product, result }) {
     product[0].sizename = value
   }
   const next = () => {
-    document.querySelector("#gaa1").classList.toggle('active')
+    count = (count + 1) % images.length;
+    setIndex(count)
+  }
+
+  const prev = () =>{
+    const productsLenthg = images.length
+    count = (index + productsLenthg - 1) % productsLenthg;
+    setIndex(count)
   }
 
   return (
@@ -40,26 +49,22 @@ function producDetails({ product, result }) {
 
             <div id="carouselExampleControls" className="carousel slide relative" data-bs-ride="carousel">
               <div className="carousel-inner relative w-full overflow-hidden">
-                {
-                  images.map((item, i) => (
-                    <div id={"gaa" + i} className="carousel-item active relative float-left w-full" key={i}>
-                      <Image
-                        src={"/imagesServer2/" + item}
-                        width={400}
-                        height={300}
-                        alt="..."
-                      />
-                    </div>
 
-                  ))
-                }
+                <div className="carousel-item active relative float-left w-full">
+                  <Image
+                    src={"/imagesServer2/" + images[index]}
+                    width={400}
+                    height={300}
+                    alt="..."
+                  />
+                </div>
               </div>
               <button
                 className="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
                 type="button"
                 data-bs-target="#carouselExampleControls"
                 data-bs-slide="prev"
-                onClick={() => next()}
+                onClick={() => prev()}
               >
                 <span className="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
                 <span className="visually-hidden">Previous</span>
