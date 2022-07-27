@@ -34,7 +34,7 @@ function producDetails({ product, result }) {
     setIndex(count)
   }
 
-  const prev = () =>{
+  const prev = () => {
     const productsLenthg = images.length
     count = (index + productsLenthg - 1) % productsLenthg;
     setIndex(count)
@@ -42,7 +42,7 @@ function producDetails({ product, result }) {
 
   return (
     <Layout>
-      <div>
+      <div className='block m-auto self-center'>
         <div><Toaster></Toaster></div>
         <div className="product-detail-container">
           <div>
@@ -86,28 +86,24 @@ function producDetails({ product, result }) {
             <span className='self-center text-xl font-semibold text-center'>Zaffari's Boutique</span>
 
             <div className="product-detail-desc">
-
-              <p className="price">{product[0].currency == "USD" ? "$" : "S/."}{product[0].price}</p>
-              <div className="quantity">
-                <h3>Cantidad:</h3>
-                <p className="justify-between grid gap-4 grid-cols-3 items-center">
-                  <span className="text-red-500/100" onClick={decQty}><AiOutlineMinus /></span>
-                  <span className="num">{qty}</span>
-                  <span className="text-green-500/100" onClick={() => (qty >= product[0].stock) ? toast.error("Ya no hay productos en el almacen") : incQty()}><AiOutlinePlus /></span>
-                </p>
+              <div>
+                <p className="price">{product[0].currency == "USD" ? "$" : "S/."}{product[0].price}</p>
+                <div className="quantity">
+                  <h3>Cantidad:</h3>
+                  <p className="justify-between grid gap-4 grid-cols-3 items-center">
+                    <span className="text-red-500/100" onClick={decQty}><AiOutlineMinus /></span>
+                    <span className="num">{qty}</span>
+                    <span className="text-green-500/100" onClick={() => (qty >= product[0].stock) ? toast.error("Ya no hay productos en el almacen") : incQty()}><AiOutlinePlus /></span>
+                  </p>
+                </div>
               </div>
-
-
               <div className="buttons-size">
                 {(result.length == 0) ? undefined : result.map((item, i) => (<button type="button" className={i === iclick ? "add-to-size selected-image" : "add-to-size"} key={i} onClick={() => changeStockbySize(item.stock, item.sizename, i)}>{item.sizename}</button>))}
               </div>
 
-              <div className='grid grid-cols-1 items-center self-center place-content-center justify-items-center justify-self-center content-center'>
-                <div className='self-center text-center pt-8 flex pr-3 md:pr-1 sm:pl-8 pb-4 '>
-                  <a href="#" className="cart-main text-white text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:text-red" onClick={() => onAdd(product[0], qty)}><AiOutlineShoppingCart></AiOutlineShoppingCart></a>
-                </div>
+              <div className="grid gap-1 md:gap-6 grid-cols-1 md:grid-cols-3 pt-8 ">
+                <button className="md:col-start-2 text-indigo-100 text-4xl transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2"><i><AiOutlineShoppingCart className='display-block m-auto'></AiOutlineShoppingCart></i></button>
               </div>
-
 
             </div>
           </div>
