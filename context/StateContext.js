@@ -10,6 +10,7 @@ export const StateContext = ({ children }) => {
     const [totalQuantities, setTotalQuantities] = useState(0);
     const [qty, setQty] = useState(1);
     const [size,setSize] = useState("");
+    const [permissio,setPermissio] = useState("")
 
     let foundProduct;
     let index;
@@ -121,7 +122,9 @@ export const StateContext = ({ children }) => {
             onRemove,
             toggleCartItemQuanitity,
             size,
-            setSize
+            setSize,
+            permissio,
+            setPermissio
         }}
         >
             {children}

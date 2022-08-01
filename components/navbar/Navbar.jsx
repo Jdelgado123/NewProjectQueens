@@ -6,12 +6,16 @@ import Cart from '../cart/Cart'
 
 
 const Navbar = () => {
-  const { showCart, setShowCart, totalQuantities } = useStateContext();
+  const { showCart, setShowCart, totalQuantities, permissio,setPermissio } = useStateContext();
   const aea = () => {
     document.querySelector('#menu').classList.toggle('hidden')
   }
 
+  const cleanpermissio = () =>{
+    setPermissio("")
+  }
 
+console.log(permissio)
 
   return (
     <nav className=" bg-black flex border-gray-200 px-2 sm:px-5 py-2.5 dark:bg-gray-800">
@@ -28,30 +32,34 @@ const Navbar = () => {
         </button>
         <div id='menu' data-collapse-toggle="mobile-menu" className="hidden w-full md:block md:w-auto">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-
+            
+            {permissio == "High"?
             <Link href={"/admin"}>
               <button className="flex flex-row text-white bg-black items-center w-full px-2 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <span>Admin</span>
               </button>
             </Link>
+            : undefined}
+            
 
-
+            {permissio=="Low" ?undefined:
             <Link href={"/seccion"}>
               <button className="flex flex-row text-white bg-black items-center w-full px-2 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <span>Secciones</span>
               </button>
             </Link>
+            }
 
-            <Link href={"/login"}>
-              <button className="flex flex-row text-white bg-black items-center w-full px-2 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
-                <span>Login</span>
-              </button>
-            </Link>
-
-
-            <Link href={"/teller"}>
+            {permissio == "" ?undefined:<Link href={"/teller"}>
               <button className="flex flex-row text-white bg-black items-center w-full px-2 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <span>Caja</span>
+              </button>
+            </Link>}
+            
+
+            <Link href={"/login"}>
+              <button className="flex flex-row text-white bg-black items-center w-full px-2 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" onClick={()=>cleanpermissio()}>
+                <span>Login</span>
               </button>
             </Link>
 

@@ -2,9 +2,12 @@ import axios from 'axios'
 import React from 'react'
 import {useState} from 'react'
 import {useRouter} from 'next/router'
+import {useStateContext} from '../../context/StateContext'
+import Link from 'next/link'
 
 const Login = () => {
 
+  const {permissio,setPermissio} = useStateContext()
   const router = useRouter()
   const [credentials, setCredentials] = useState({
     username: '',
@@ -25,9 +28,11 @@ const Login = () => {
     const {data:result} = await axios.post('/api/login', credentials)
     
     if(result.length>0 && result[0].state=='High'){
-      router.push('/adminpage')
+      setPermissio('High')
+      router.push('/admin')
     }if (result.length>0 && result[0].state=='Low') {
-      router.push('/seccion')
+      setPermissio('Low')
+      router.push('/teller')
     } else {
       console.log('creedenciales erroneas')
     }
@@ -54,7 +59,10 @@ const Login = () => {
             <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Recordar Creedenciales</label>
           </div>
         </div>
-        <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar con tu cuenta</button>
+        <Link href={"/seccion"}>
+        <label type="button" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300 self-center">Entrar como Invitado</label>
+        </Link>
+        <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Entrar</button>
       </form>
     </div>
   )
