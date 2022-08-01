@@ -50,7 +50,7 @@ console.log(permissio)
             </Link>
             }
 
-            {permissio == "" ?undefined:<Link href={"/teller"}>
+            {permissio=="invitado"?undefined:<Link href={"/teller"}>
               <button className="flex flex-row text-white bg-black items-center w-full px-2 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
                 <span>Caja</span>
               </button>
