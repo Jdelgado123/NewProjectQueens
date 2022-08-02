@@ -17,7 +17,16 @@ function producDetails({ product, result }) {
   const [iclick, setIclick] = useState(0);
 
   const { decQty, incQty, qty, onAdd, setQty } = useStateContext();
-  const images = JSON.parse(product[0].name_img)
+
+  console.log(product)
+
+  console.log("este es otro console")
+
+  console.log(product[0])
+
+  const namei = product[0].name_img
+
+  const images = JSON.parse(namei)
 
   useEffect(() => {
     setStocks(product[0].stock)
