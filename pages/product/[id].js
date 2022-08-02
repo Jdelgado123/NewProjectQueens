@@ -24,9 +24,11 @@ function producDetails({ product, result }) {
 
   console.log(product[0])
 
-  const namei = product[0].name_img
+  const namei = product[0].name_imgs
 
   const images = JSON.parse(namei)
+
+  console.log(images[0])
 
   useEffect(() => {
     setStocks(product[0].stock)
@@ -111,7 +113,7 @@ function producDetails({ product, result }) {
               </div>
 
               <div className="grid gap-1 md:gap-6 grid-cols-1 md:grid-cols-3 pt-8 ">
-                <button className="md:col-start-2 text-indigo-100 text-4xl transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2"><i><AiOutlineShoppingCart className='display-block m-auto'></AiOutlineShoppingCart></i></button>
+                <button className="md:col-start-2 text-indigo-100 text-4xl transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2" onClick={() => onAdd(product[0], qty)}><i><AiOutlineShoppingCart className='display-block m-auto'></AiOutlineShoppingCart></i></button>
               </div>
 
             </div>

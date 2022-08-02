@@ -173,10 +173,13 @@ const Formproduct = () => {
 
   const CreateCategory = async () => {
     const category_name = document.querySelector('#category_name')
+    const selectSeccion = document.querySelector('#selectSeccion')
 
 
-    const dataCreate = { name: category_name.value }
 
+    const dataCreate = { name: category_name.value, descripcion:selectSeccion.value }
+
+    document.getElementById('selectSeccion').value = 'mujer'
     document.getElementById('category_name').value = null
 
     await axios.post('/api/categories', dataCreate)
@@ -222,11 +225,11 @@ const Formproduct = () => {
             <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="price" type="number" name='price' onChange={handleChange} required />
           </div>
           <div>
-          <label htmlFor="location" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Moneda:</label>
-          <select name="currency" id="currency" className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white' onChange={stateCurrency} required>
-            <option value="PEN">Soles</option>
-            <option value="USD">Dolares</option>
-          </select>
+            <label htmlFor="location" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Moneda:</label>
+            <select name="currency" id="currency" className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white' onChange={stateCurrency} required>
+              <option value="PEN">Soles</option>
+              <option value="USD">Dolares</option>
+            </select>
           </div>
         </div>
 
@@ -248,13 +251,26 @@ const Formproduct = () => {
               </div>
 
               <div>
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form className="bg-white shadow-md rounded px-8 pt-4 pb-8 mb-4">
                   <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category_name">
                       Name
                     </label>
                     <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="category_name" type="text" placeholder="Nombre de la categoria" required />
+
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category_name">
+                      Seleccione Seccion
+                    </label>
+
+                    <select name="selectSeccion" id="selectSeccion" className='shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white' required>
+                      <option value="mujer">Mujer</option>
+                      <option value="hombre">Hombre</option>
+                      <option value="sexShop">SexShop</option>
+                      <option value="unisex">Unisex</option>
+                    </select>
+
                   </div>
+
 
                   <div className="flex items-center justify-between">
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => CreateCategory()}>
@@ -316,7 +332,7 @@ const Formproduct = () => {
         <label htmlFor="stock" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Cantidad:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="stock" type="number" name='stock' onChange={handleChange} required />
 
-        
+
 
         <label htmlFor="barcode" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Codigo de barras:</label>
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="barcode" type="text" name='barcode' onChange={handleChange} />
@@ -325,7 +341,7 @@ const Formproduct = () => {
         <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" id="location" type="text" name='location' onChange={handleChange} placeholder="Ubicación" />
 
         <label htmlFor="imagen" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Imagen:</label>
-        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" multiple id="img" type="file" name="img" required/>
+        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" multiple id="img" type="file" name="img" required />
         <div id='previewImage' className="block text-gray-700 dark:text-white text-sm font-bold mb-2"></div>
         <div className='pt-6'>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Crear Producto</button>
