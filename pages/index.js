@@ -11,9 +11,9 @@ function Home ({products}) {
   const {permissio} = useStateContext()
   const router = useRouter()
 
-  useEffect(() => {
+  /*useEffect(() => {
     permissio == ""?router.push('/login'):console.log(permissio)
-  }, [])
+  }, [])*/
 
   return (
     <Layout>
