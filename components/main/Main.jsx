@@ -23,7 +23,7 @@ const Main = ({ products }) => {
 
     <div className='grid gap-1 md:gap-6 grid-cols-3 md:grid-cols-4'>
 
-      {products.map((product, index) => (
+      {products.lenght==0?undefined:products.map((product, index) => (
         <div key={index} className="max-w-sm bg-white shadow-xl">
 
           <div className='relative overflow-hidden'>

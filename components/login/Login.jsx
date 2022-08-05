@@ -7,8 +7,6 @@ import Link from 'next/link'
 import Swal from 'sweetalert2'
 
 
-
-
 const Login = () => {
 
   const {permissio,setPermissio} = useStateContext()
@@ -40,15 +38,20 @@ const Login = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const {data:result} = await axios.post('/api/login', credentials)
-    
-    if(result.length<=0){
-      alert()
-    }else{
-      setPermissio(result[0].state)
-      result[0].state='High'?router.push('/admin'):router.push('/teller')
-    }
+    const {data} = await axios.post('/api/login', credentials)
+
+    Swal.fire({
+      title:data.alertTitle,
+      text:data.alertMessage,
+      icon:data.alertIcon,
+      showConfirmButton:data.showConfirmButton,
+      timer:data.timer
+    }).then(() => {
+      window.location = data.ruta
+    })
+
   }
+
 
 
   return (

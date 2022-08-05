@@ -1,3 +1,5 @@
+import Protect from '../../../middleware/Protect';
+
 const db = require('../../../config/db')
 
 async function handler(req, res) {
@@ -24,4 +26,4 @@ const postProducts = async (req,res) =>{
     return res.status(200).json(result)
 }
 
-export default handler;
+export default Protect(handler);
