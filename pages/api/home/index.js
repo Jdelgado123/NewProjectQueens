@@ -26,4 +26,4 @@ const postProducts = async (req,res) =>{
     return res.status(200).json(result)
 }
 
-export default Protect(handler);
+export default handler;
