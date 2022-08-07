@@ -4,6 +4,8 @@ import {useState} from 'react'
 import {useRouter} from 'next/router'
 import {useStateContext} from '../../context/StateContext'
 import Link from 'next/link'
+import Swal from 'sweetalert2'
+
 
 const Login = () => {
 
@@ -23,21 +25,33 @@ const Login = () => {
     setCredentials({ ...credentials, [name]: value })
 
   }
+
+  const alert = ()=>{
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario o Contraseña Incorrecta',
+      text: 'Comunicarse con el administrador del sitio web si cree que es un error',
+    })
+    document.getElementById('username').value=""
+    document.getElementById('password').value=""
+
+  }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const {data:result} = await axios.post('/api/login', credentials)
-    
-    if(result.length>0 && result[0].state=='High'){
-      setPermissio('High')
-      router.push('/admin')
-    }if (result.length>0 && result[0].state=='Low') {
-      setPermissio('Low')
-      router.push('/teller')
-    } else {
-      setPermissio('invitado')
-      console.log('creedenciales erroneas')
-    }
+    const {data} = await axios.post('/api/login', credentials)
+
+    Swal.fire({
+      title:data.alertTitle,
+      text:data.alertMessage,
+      icon:data.alertIcon,
+      showConfirmButton:data.showConfirmButton,
+      timer:data.timer
+    }).then(() => {
+      window.location = data.ruta
+    })
+
   }
+
 
 
   return (
