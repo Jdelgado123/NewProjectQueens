@@ -18,7 +18,6 @@ const Formproduct = () => {
 
   const tallas = []
   const SumatotalSize = 0
-  console.log(valorLocalhost)
   useEffect(() => {
     async function fa() {
       const { data } = await axios.get('/api/subcategories', { params: { id: categor } })

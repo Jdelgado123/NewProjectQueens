@@ -10,9 +10,6 @@ import { parseCookies } from '../utils/cookiesparser';
 
         const data = parseCookies(req)
 
-        console.log(data)
-        
-        console.log(getCookies({ req, res }))
         
 
       return handler(req,res)  

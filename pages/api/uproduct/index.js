@@ -32,7 +32,6 @@ const postProducts=async(req, res) =>{
 
 const deleteProduct=async(req,res) =>{
     const {id} = req.body
-    console.log(req)
     const [result] = await db.query('DELETE FROM products WHERE id_product=?',[id]);
     return res.status(200).json(result)
 

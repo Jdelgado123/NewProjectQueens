@@ -15,7 +15,6 @@ const Cart = () => {
   const sendRequired = async (cartItems) => {
     
     cartItems.totalPrice= totalPrice
-    console.log(cartItems)
     await axios.post('/api/teller', {cartItems,totalPrice})
 
   }

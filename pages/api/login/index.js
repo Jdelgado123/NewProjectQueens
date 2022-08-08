@@ -16,8 +16,7 @@ export default async function handler(req, res) {
 }
 
 const getCreedentials = async (req, res) => {
-    console.log("estamos en get")
-    console.log(req)
+    
     //return res.status(200).json(result)
 }
 

@@ -20,9 +20,8 @@ export const StateContext = ({ children }) => {
             (item) => item.id_product === product.id_product
         )
 
-        console.log(product)
         if (product.currency == "USD"){
-            setTotalPrice((prev) => (prev + product.price * quantity) * 3.82)
+            setTotalPrice((prev) => prev + ( product.price * quantity * 3.82))
             setTotalQuantities((prev) => prev + quantity)
         }else{
             setTotalPrice((prev) => prev + product.price * quantity)
@@ -56,6 +55,8 @@ export const StateContext = ({ children }) => {
 
         if(product.currency == "USD"){
             setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity * 3.82);
+            
+            console.log("es el precio total segun cuando ya se removio"+totalPrice)
         }else{
             setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity);
         }
@@ -66,13 +67,11 @@ export const StateContext = ({ children }) => {
 
     const toggleCartItemQuanitity = (datos, value) => {
 
-        console.log(datos)
+        
         foundProduct = cartItems.find((item) => item.id_product === datos.id_product)
         index = cartItems.findIndex((product) => product.id_product === datos.id_product);
         const newCartItems = cartItems.filter((item) => item.id_product !== datos.id_product)
         
-        console.log(newCartItems)
-        console.log(foundProduct)
 
         if (value === 'inc') {
             setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 }]);
@@ -124,6 +123,7 @@ export const StateContext = ({ children }) => {
             size,
             setSize,
             permissio,
+            setTotalPrice,
             setPermissio
         }}
         >

@@ -26,17 +26,17 @@ const DeleteProduct = () => {
 
         const name = document.querySelector('#input').value
         const { data } = await axios.post('/api/home', { name: name })
-        console.log(data)
+        
         numero == 0 ? document.querySelector('#section').classList.toggle('hidden') : null
 
         setDatos(data)
-        console.log(data)
+        
         setNumero(numero + 1)
     }
 
     const Delete = async(id) =>{
         const {data} = await axios.post('/api/productDelete',{id:id})
-        console.log(data)
+        
         setSee(true)
     }
 

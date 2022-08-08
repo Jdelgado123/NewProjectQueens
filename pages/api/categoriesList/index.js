@@ -7,7 +7,7 @@ async function handler(req, res) {
             return await getCategories(req,res)
     
         case "POST":
-            return console.log("aea post de mrd")
+            return console.log("post de mrd")
     }
   
 }

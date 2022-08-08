@@ -10,14 +10,15 @@ import { useStateContext } from '../context/StateContext'
 
 const succes = () => {
 
-    const {showCart,setShowCart,setCartItems,setTotalQuantities} = useStateContext();
+    const {setShowCart,setCartItems,setTotalQuantities,setTotalPrice} = useStateContext();
 
     useEffect(()=>{
         setShowCart(false)
         setCartItems([])
         setTotalQuantities(0)
+        setTotalPrice(0)
         runFireworks()
-    },[setCartItems, setShowCart,setTotalQuantities])
+    },[setCartItems, setShowCart,setTotalQuantities,setTotalPrice])
 
 
     return (

@@ -27,17 +27,17 @@ const Searchproduct = () => {
 
         const name = document.querySelector('#input').value
         const { data } = await axios.post('/api/home', { name: name })
-        console.log(data)
+        
         numero == 0 ? document.querySelector('#section').classList.toggle('hidden') : null
 
         setDatos(data)
-        console.log(data)
+        
         setNumero(numero + 1)
     }
 
     const buttonEditar = async (id) => {
         const { data } = await axios.post('/api/updateProduct', { id: id })
-        console.log(id)
+       
         const ga = document.querySelector('#modal');
         ga.classList.toggle('hidden')
         document.querySelector('#name').value = (data === undefined) ? undefined : data[0].name
