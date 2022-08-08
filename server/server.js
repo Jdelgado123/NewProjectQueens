@@ -3,6 +3,7 @@ const next = require('next')
 const port = 3000;
 const cors = require('cors')
 const path = require('path')
+var cookieParser = require('cookie-parser');
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev});
@@ -10,6 +11,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(()=>{
     const server = express();
+    server.use(cookieParser())
     server.use(express.json())
     server.use(require('../pages/api/route'))
     server.use(cors())

@@ -1,5 +1,6 @@
 import db from "../../../config/db"
 var jwt = require('jsonwebtoken')
+import { setCookie } from 'cookies-next';
 
 
 export default async function handler(req, res) {
@@ -36,7 +37,8 @@ const postCreedentials = async (req, res) => {
         })
     }else{
         const id = result[0].id
-        const token = jwt.sign({id},process.env.JWT_SECRET,{
+        const role = result[0].state
+        const token = jwt.sign({id,role},process.env.JWT_SECRET,{
             expiresIn:process.env.JWT_EXPIRA
         })
         
@@ -45,8 +47,8 @@ const postCreedentials = async (req, res) => {
             httpOnly:true,
         }
 
-        res.cookie('jwt',token,cookieOptions)
-
+        res.cookie('my_cookiesss', token ,cookieOptions);
+        
         res.status(200).json({
             alert:true,
             alertTitle:"OK",
@@ -54,7 +56,8 @@ const postCreedentials = async (req, res) => {
             alertIcon:'success',
             showConfirmButton:false,
             timer:800,
-            ruta:'/',
+            permissio:role,
+            ruta: role=='High'?'/admin':'/teller',
         })
     }
 }

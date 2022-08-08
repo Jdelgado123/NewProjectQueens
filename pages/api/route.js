@@ -2,8 +2,12 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const path = require('path')
+const cookieParser = require('cookie-parser')
+const app = express()
 
 const db =require('../../config/db')
+
+app.use(cookieParser())
 
 const diskStorage = multer.diskStorage({
     destination:path.join(__dirname, '../../public/imagesServer2'),
@@ -20,6 +24,8 @@ const fileUpload = multer({
 
 router.get('/asas',async(req,res)=>{
     console.log("adada")
+
+    console.log(req.cookies)
     var ada = req.body
     res.status(200).json(ada)
 })
@@ -57,8 +63,10 @@ router.post('/images/post',fileUpload,async(req,res)=>{
 
 router.post('/ga/post',async(req,res)=>{
     const {sizes} = req.body
-    console.log(sizes)
-    res.status(200).json(sizes)
+
+    res.cookie('my_cookie', 'geeksforgeeks');
+    res.send('Cookies added')
+    console.log(req.cookies)
 })
 
 

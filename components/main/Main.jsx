@@ -8,6 +8,9 @@ const Main = ({ products }) => {
   const [src,setSrc] = useState('/sssaaaaaa')
   const [idpr,setIdpr] = useState(0)
 
+  console.log('mrd'+'asd'+products)
+  console.log(products)
+
   const togleModalImages = (id,image) => {
     document.querySelector('#modalImages').classList.toggle('hidden')
 

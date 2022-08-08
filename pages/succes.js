@@ -13,14 +13,12 @@ const succes = () => {
     const {showCart,setShowCart,setCartItems,setTotalQuantities} = useStateContext();
 
     useEffect(()=>{
-        localStorage.clear()
         setShowCart(false)
         setCartItems([])
         setTotalQuantities(0)
         runFireworks()
     },[setCartItems, setShowCart,setTotalQuantities])
 
-    console.log(showCart)
 
     return (
         <Layout>

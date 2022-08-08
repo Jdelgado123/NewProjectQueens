@@ -4,10 +4,9 @@ import Layout from "../components/Layout"
 import {valorLocalhost} from "../utils/globals"
 import {useStateContext} from "../context/StateContext"
 import {useRouter} from "next/router"
-import {useEffect} from "react"
 
 
-function Home ({products}) {
+function Home () {
   const {permissio} = useStateContext()
   const router = useRouter()
 
@@ -18,7 +17,7 @@ function Home ({products}) {
   return (
     <Layout>
       <div>
-      <Main products={products}></Main>
+      
       </div>
     </Layout>
     
@@ -26,12 +25,17 @@ function Home ({products}) {
 }
 
 export const getServerSideProps = async(context) =>{
-  const {data:products} =await axios.get(`http://${valorLocalhost}:3000/api/home`);
-  return{
-    props:{
-      products,
+  const {data} = await axios.get(`http://${valorLocalhost}:3000/api/home`)
+
+  if(data.redirect == '/login'){
+    return{
+      redirect:{
+        destination:'/login',
+        permanent:false
+      }
     }
   }
+
 }
 
 export default Home

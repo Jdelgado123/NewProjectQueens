@@ -1,40 +1,21 @@
- import {promisify} from 'util';
+import { getCookie, getCookies } from 'cookies-next';
+import {promisify} from 'util';
+import { parseCookies } from '../utils/cookiesparser';
  
  const Protect = (handler) =>{
     return async (req, res) => {
         // Get token and check if it exists
         let token;
-    
-        if (req.cookies && req.cookies.jwt) {
-          token = req.cookies.jwt;
-        }
-    
-        if (!token) {
-          return res.status(200).json({
-            success: false,
-            message: 'Please log in to get access.',
-          });
-        }
-    
-        try {
-          // Verify token
-          const decoded = await promisify(jwt.verify)(
-            token,
-            process.env.JWT_SECRET
-          );
-    
-          // Check if user exists with refresh token
-          
-    
-          // Grant access to protected rout
-    
+        
 
-        } catch (error) {
-          return res.status(200).json({
-            success: false,
-            message: 'Please log in to get access.',
-          });
-        }
+        const data = parseCookies(req)
+
+        console.log(data)
+        
+        console.log(getCookies({ req, res }))
+        
+
+      return handler(req,res)  
       };
  }
 
