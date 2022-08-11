@@ -31,7 +31,7 @@ const postRequires = async (req, res) => {
 }
 
 const putRequires = async (req, res) => {
-    const {id,state} = req.body
+    const {id,state,method} = req.body
 
     if(state === "cancelado"){
         const [select] = await db.query("SELECT stock,id_product FROM products_required WHERE id_required=?",[id])
@@ -48,7 +48,7 @@ const putRequires = async (req, res) => {
         const [result] = await db.query("UPDATE required SET state= ? WHERE id_required = ?",[state,id])
         return res.status(200).json(result)
     }else{
-        const [result] = await db.query("UPDATE required SET state= ? WHERE id_required = ?",[state,id])
+        const [result] = await db.query("UPDATE required SET state= ?, method= ? WHERE id_required = ?",[state,method,id])
         return res.status(200).json(result)
     }
 
