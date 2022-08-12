@@ -52,7 +52,9 @@ const Teller = () => {
 
   const readythepay = async (method_of_pay) => {
 
-    await axios.put('/api/requires', { id: faa[0].id_required, state: "pagado", method: method_of_pay })
+    const costPay = costTotal - discount
+
+    await axios.put('/api/requires', { id: faa[0].id_required, state: "pagado", method: method_of_pay, total_cost: costPay })
 
     setState(true)
 
@@ -61,11 +63,11 @@ const Teller = () => {
 
   const toglelending = () => {
     document.querySelector('#lending').classList.toggle('hidden')
-    
+
   }
 
   const applyDiscount = () => {
-    setDiscount(document.querySelector('#discount').value) 
+    setDiscount(document.querySelector('#discount').value)
   }
 
   return (
@@ -184,7 +186,7 @@ const Teller = () => {
                             ))}
 
                           </div>
-                          <div className='overflow-y-auto h-72 max-w-sm mx-auto bg-white shadow-lg ring-1 ring-black/5 rounded-xl divide-y items-center'>
+                          <div className='overflow-y-auto h-72 relative max-w-sm mx-auto bg-white shadow-lg ring-1 ring-black/5 rounded-xl divide-y items-center'>
                             <ul role="list" className="[&>*]:p-4 [&>*]:bg-white [&>*]:rounded-lg [&>*]:shadow space-y-4">
                               <table className="text-left w-full border-collapse">
                                 <thead>
@@ -208,26 +210,28 @@ const Teller = () => {
                                 </tbody>
                               </table>
 
-                              {discount==0?undefined:<i>Descuento de {discount}</i>}
-                              <div className='text-center grid grid-cols-2'>
-                                <h3 className='text-3xl font-bold text-red-800'>TOTAL:</h3>
-                                <h3 className='text-3xl'>{discount==0?costTotal:costTotal-discount}</h3>
-                              </div>
-                              <div className="pl-5">
-                                <button className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:text-red  '>Imprimir</button>
-                              </div>
+                              {discount == 0 ? undefined : <h3 className="pl-6">Descuento: <i className='text-red-500'>{discount}.00</i> - <i>{costTotal}</i> </h3>}
 
                             </ul>
                           </div>
+
                         </div>
                       </div>
+                      <div className='flex p-2'>
+                        <div className='absolute bottom-0 right-10 text-center grid grid-cols-2'>
+                          <h3 className='text-3xl font-bold text-red-800'>TOTAL:</h3>
+                          <h3 className='text-3xl'>{discount == 0 ? costTotal : costTotal - discount}</h3>
+                        </div>
+                      </div>
+
                     </div><div className="absolute inset-0 pointer-events-none border border-black/5 rounded-xl dark:border-white/5"></div></div>
 
-                    <div className="flex p-6 gap-0 rounded-b border-t border-gray-200 dark:border-gray-600">
+                    <div className="flex p-4 gap-0 rounded-b border-t border-gray-200 dark:border-gray-600">
                       <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => readythepay('tarjeta')}><i><BsFillCreditCardFill className='display-block m-auto'></BsFillCreditCardFill></i></button>
                       <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => readythepay('efectivo')}><i><BsCashStack className='display-block m-auto'></BsCashStack></i></button>
                       <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending()}><i><MdCardGiftcard className='display-block m-auto'></MdCardGiftcard></i></button>
                       <button className="text-indigo-100 text-2xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending()}><i><BsGiftFill className='display-block m-auto'></BsGiftFill></i></button>
+                      <button className="absolute right-8 text-white transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending()}>Pagar</button>
                     </div>
                   </div>
                 </div>
