@@ -54,10 +54,6 @@ const Formproduct = () => {
     setCategor(document.getElementById('category').value)
   }
 
-  /*const stateSubcategory = () => {
-    setSubcate(document.getElementById('sub_category').value)
-  }*/
-
   const stateCurrency = () => {
     setCurrency(document.getElementById('currency').value)
   }
@@ -113,11 +109,7 @@ const Formproduct = () => {
   const togleModal = () => {
     document.querySelector('#modal').classList.toggle('hidden')
   }
-
-  /*const togleModalCreateSubcategoria = () => {
-    document.querySelector('#modalSubcategorias').classList.toggle('hidden')
-  }*/
-
+  
   const togleModalCreateCategoria = () => {
     document.querySelector('#modalCategorias').classList.toggle('hidden')
   }
@@ -154,21 +146,6 @@ const Formproduct = () => {
     togleModal()
     document.getElementById('stock').setAttribute("readOnly", "readOnly")
   }
-
-  /*const CreateSubcategoria = async () => {
-    const subcategoria_name = document.querySelector('#subcategoria_name')
-    const create_description = document.querySelector('#create_description')
-    const create_category = document.querySelector('#create_category')
-
-    const dataCreate = { name: subcategoria_name.value, description: create_description.value, category: create_category.value }
-
-    subcategoria_name.value = null
-    create_category.value = null
-    create_description.value = null
-
-    await axios.post('/api/subcategories', dataCreate)
-
-  }*/
 
   const CreateCategory = async () => {
     const category_name = document.querySelector('#category_name')
@@ -352,62 +329,3 @@ const Formproduct = () => {
 
 export default Formproduct
 
-
-/*
-
-<div id="modalSubcategorias" tabIndex="-1" className="hidden overflow-y-auto overflow-x-visible fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full place-content-center min-h-screen grid">
-          
-          <div className='fixed inset-0 bg-gray-700 bg-opacity-70'></div>
-
-          <div className="relative p-4 w-full max-w-7xl h-full md:h-auto">
-
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-
-              <div className="flex justify-between items-center p-5 rounded-t border-b dark:border-gray-600">
-                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
-                  Crear Subcategoria y Categoria
-                </h3>
-                <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="extralarge-modal" onClick={() => togleModalCreateSubcategoria()}>
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                </button>
-              </div>
-
-              <div>
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                  <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="create_name">
-                      Name
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subcategoria_name" type="text" placeholder="Nombre de la subcategoria" required />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="create_description">
-                      Descripción
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="create_description" type="text" placeholder="No es necesario llenar el campo" />
-                  </div>
-                  <div className="mb-6">
-
-                    <label htmlFor="create_category" className="block text-gray-700 dark:text-white text-sm font-bold mb-2">Categoria:</label>
-                    <select id="create_category" className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-600 dark:border-slate-900 dark:text-white" name="Categorias" onChange={statecategory}>
-                      <option value="null">Seleccione categoria</option>
-                      {arraycategory.map((cat, index) => (
-                        <option key={index} value={cat.id_category}>{cat.name}</option>
-                      ))}
-                    </select>
-
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={() => CreateSubcategoria()}>
-                      Crear
-                    </button>
-                    <button data-modal-toggle="extralarge-modal" type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600" onClick={() => togleModalCreateSubcategoria()} >Cancelar</button>
-                  </div>
-
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-*/

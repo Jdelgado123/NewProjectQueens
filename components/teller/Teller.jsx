@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import axios from 'axios'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { BsFillCreditCardFill, BsCashStack, BsGiftFill } from 'react-icons/bs'
 import { MdCardGiftcard } from 'react-icons/md'

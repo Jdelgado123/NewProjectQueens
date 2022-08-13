@@ -4,8 +4,17 @@ const multer = require('multer')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const app = express()
+const tinyfy = require('tinify') 
+
+const compressimg = () => {
+    tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
+    tinyfy.fromFile("gaa.jpg").toFile("optimized.jpg");
+
+}
+
 
 const db =require('../../config/db')
+const console = require('console')
 
 app.use(cookieParser())
 
@@ -47,11 +56,10 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     
 })
 
-router.post('/ga/post',async(req,res)=>{
-    const {sizes} = req.body
-
-    res.cookie('my_cookie', 'geeksforgeeks');
-    res.send('Cookies added')
+router.get('/compress',async(req,res)=>{
+    
+    compressimg()
+    
 })
 
 

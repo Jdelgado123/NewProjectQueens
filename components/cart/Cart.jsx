@@ -100,13 +100,3 @@ const Cart = () => {
 }
 
 export default Cart
-
-/* 
-
-<a href= {`https://wa.me/51986775834?text=El%20carrito%20tiene%20${totalPrice}%20de%20valor,%20lista%20de%20compras${cartItems.map((item)=>("%0AObjeto:"+item.name+"  Precio Unitario:"+item.price+" Cantidad:"+item.quantity+"%0A"))}`} rel='noreferrer' target="_blank">
-              <button type="button" className="buy-now">
-                Pagar Ahora
-              </button>
-              </a>
-
-*/
