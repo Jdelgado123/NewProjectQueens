@@ -71,6 +71,9 @@ function report() {
                                         Fecha
                                     </th>
                                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                        Estado
+                                    </th>
+                                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                         Metodo
                                     </th>
                                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -87,6 +90,7 @@ function report() {
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{index + 1}</td>
                                         <td className="text-sm text-gray-900 font-light px-4 py-4 whitespace-nowrap">{item.date_request}</td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{item.state}</td>
+                                        {item.method=="free"?<td className="text-sm text-red-700 font-light px-6 py-4 whitespace-nowrap">{item.method}</td>:<td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{item.method}</td>}
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{item.discount}</td>
                                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {item.total_cost}

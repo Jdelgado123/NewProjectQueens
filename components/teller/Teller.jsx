@@ -18,6 +18,7 @@ const Teller = () => {
   const [costTotal, setCostTotal] = useState(null)
   const [discount, setDiscount] = useState(0)
   const [loansdates, setLoansdates] = useState({})
+  const [method, setMethod] = useState("")
 
   useEffect(() => {
     async function ga() {
@@ -54,18 +55,33 @@ const Teller = () => {
     document.querySelector('#modal').classList.toggle('hidden')
     setDiscount(0)
     setLoansdates({})
+    setMethod("")
   }
 
-  const readythepay = async (method_of_pay) => {
+  const readythepay = async () => {
 
     const costPay = costTotal - discount
 
-    await axios.put('/api/requires', { id: faa[0].id_required, state: "pagado", method: method_of_pay, total_cost: costPay ,discount:discount })
+    await axios.put('/api/requires', { id: faa[0].id_required, state: "pagado", method: method, total_cost: costPay ,discount:discount })
 
     setState(true)
 
-    method_of_pay == "free" ? (toglelending('free'), togleModalx()) : togleModalx()
+  }
 
+  const declareMethod = (x) =>{
+    
+    if (x == 'free') {
+      setMethod(x)
+      document.querySelector('#modalFree').classList.toggle('hidden')
+    } if (x == 'loan') {
+      setMethod(x)
+      document.querySelector('#modalLoan').classList.toggle('hidden')
+    } if(x == 'giftcard') {
+      document.querySelector('#lending').classList.toggle('hidden')
+    } if(x == 'efectivo' || x == 'tarjeta'){
+      setMethod(x)
+    }
+    
   }
 
   const toglelending = (x) => {
@@ -306,6 +322,7 @@ const Teller = () => {
                               
                               {Object.entries(loansdates).length === 0 ? undefined:<h3 className='pl-6'>Credito a DNI:<i className='text-red-500'>{loansdates.dni}</i></h3>}
 
+                              {method == ''? undefined : <h3 className='pl-6'> Metodo de pago:<i className='text-red-500'> {method}</i></h3>}
                             </ul>
                           </div>
 
@@ -321,12 +338,12 @@ const Teller = () => {
                     </div><div className="absolute inset-0 pointer-events-none border border-black/5 rounded-xl dark:border-white/5"></div></div>
 
                     <div className="flex p-4 gap-0 rounded-b border-t border-gray-200 dark:border-gray-600">
-                      <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => readythepay('tarjeta')}><RiVisaFill /></button>
-                      <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => readythepay('efectivo')}><BsCashStack /></button>
-                      <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending('giftcard')}><MdCardGiftcard /></button>
-                      <button className="text-indigo-100 text-2xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending('free')}><BsGiftFill /></button>
-                      <button className="text-indigo-100 text-2xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending('loan')}><GiPayMoney /></button>
-                      <button className="absolute right-8 text-white transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => toglelending()}>Pagar</button>
+                      <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => declareMethod('tarjeta')}><RiVisaFill /></button>
+                      <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => declareMethod('efectivo')}><BsCashStack /></button>
+                      <button className="text-indigo-100 text-3xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => declareMethod('giftcard')}><MdCardGiftcard /></button>
+                      <button className="text-indigo-100 text-2xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => declareMethod('free')}><BsGiftFill /></button>
+                      <button className="text-indigo-100 text-2xl transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => declareMethod('loan')}><GiPayMoney /></button>
+                      <button className="absolute right-8 text-white transition-colors duration-150 bg-blue-700 rounded-lg hover:bg-indigo-800 h-10 px-6 m-2" onClick={() => readythepay()}>Pagar</button>
                     </div>
                   </div>
                 </div>
