@@ -13,10 +13,11 @@ async function handler(req, res) {
 }
 
 const getTeller = async (req, res) => {
-    //const {id} = req.query
-    console.log(req.query.cartItems)
-    //const [result] = await db.query("SELECT * FROM subcategory WHERE id_category=?",[id]);
-    //return res.status(200).json(result)
+    const {dni} = req.query
+
+    const [result] = await db.query("SELECT * FROM loans WHERE dni=?",[dni])
+    
+    return res.status(200).json(result)
 }
 
 async function postTeller(req, res) {
