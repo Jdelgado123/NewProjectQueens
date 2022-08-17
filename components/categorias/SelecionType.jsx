@@ -10,8 +10,14 @@ const SelecionType = () => {
                 <Link href={`/categorias/hombre`} >
                     <button className="text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2 text-lg">Hombre</button>
                 </Link>
+                <Link href={`/categories/peluches`} >
+                    <button className="text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2 text-lg">Peluches</button>
+                </Link>
                 <Link href={`/categorias/sexShop`} >
                     <button className="text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2 text-lg">SexShop</button>
+                </Link>
+                <Link href={`/categories/ofertas`} >
+                    <button className="text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2 text-lg">Ofertas</button>
                 </Link>
                 <Link href={`/categorias/unisex`} >
                     <button className="text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2 text-lg">Unisex</button>

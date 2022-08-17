@@ -11,6 +11,7 @@ const Searchproduct = () => {
     const [faa, setFaa] = useState(null)
     const [numero, setNumero] = useState(0)
     const [see, setSee] = useState(false)
+    const [offer,setOffer] = useState('')
 
 
     useEffect(() => {
@@ -27,17 +28,17 @@ const Searchproduct = () => {
 
         const name = document.querySelector('#input').value
         const { data } = await axios.post('/api/home', { name: name })
-        
+
         numero == 0 ? document.querySelector('#section').classList.toggle('hidden') : null
 
         setDatos(data)
-        
+
         setNumero(numero + 1)
     }
 
     const buttonEditar = async (id) => {
         const { data } = await axios.post('/api/updateProduct', { id: id })
-       
+
         const ga = document.querySelector('#modal');
         ga.classList.toggle('hidden')
         document.querySelector('#name').value = (data === undefined) ? undefined : data[0].name
@@ -58,10 +59,11 @@ const Searchproduct = () => {
         const stock = document.querySelector('#stock').value
         const price = document.querySelector('#price').value
         const description = document.querySelector('#description').value
-        const data = await axios.post('/api/getUpdateProduct', { id: faa, name: name, stock: stock, price: price, description: description })
+        const data = await axios.post('/api/getUpdateProduct', { id: faa, name: name, stock: stock,offer, price: price, description: description })
         setSee(true)
         toggle()
     }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -76,6 +78,7 @@ const Searchproduct = () => {
                             <button className="transform rounded-md bg-blue-700 px-8 py-2 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-200 hover:bg-blue-600 focus:bg-blue-600 focus:outline-none sm:mx-2" onClick={() => search()}>Buscar</button>
                         </div>
                     </div>
+
                     <div id='section' className='hidden'>
                         <section className="bg-white dark:bg-gray-900">
                             <div className="mx-auto">
@@ -90,7 +93,6 @@ const Searchproduct = () => {
                                             <p className="mt-2 text-gray-500 capitalize dark:text-gray-300 group-hover:text-gray-300">{item.stock}</p>
                                             <div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                                                 <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={() => buttonEditar(item.id_product)}>Editar</button>
-
                                             </div>
                                         </div>
                                     ))}
@@ -111,6 +113,16 @@ const Searchproduct = () => {
                                                 <input id="stock" className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="James"></input>
                                                 <label htmlFor="expiry" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Descripción</label>
                                                 <input id="description" className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="Descripción"></input>
+
+                                                <label htmlFor="expiry" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Aplicar Oferta</label>
+                                                <div className="flex items-center pb-5 pt-2">
+                                                    <div className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
+                                                        <button type="button" className="rounded-l inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => setOffer('20%')} >20%</button>
+                                                        <button type="button" className=" inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => setOffer('30%')} >30%</button>
+                                                        <button type="button" className=" rounded-r inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => setOffer('50%')}>50%</button>
+                                                    </div>
+                                                </div>
+
 
                                                 <div className="flex items-center justify-start w-full">
                                                     <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" onClick={() => getEditProduct()}>GUARDAR</button>

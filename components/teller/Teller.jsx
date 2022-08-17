@@ -58,9 +58,13 @@ const Teller = () => {
     setMethod("")
   }
 
-  const readythepay = async () => {
+  const readythepay = async (x) => {
 
     const costPay = costTotal - discount
+
+    if (x == 'free'){
+      costPay = 0
+    }
 
     await axios.put('/api/requires', { id: faa[0].id_required, state: "pagado", method: method, total_cost: costPay ,discount:discount })
 
@@ -318,7 +322,7 @@ const Teller = () => {
                                 </tbody>
                               </table>
 
-                              {discount == 0 ? undefined : <h3 className="pl-6">Descuento: <i className='text-red-500'>{discount}.00</i> - <i>{costTotal}</i> </h3>}
+                              {discount == 0 ? undefined : <h3 className="pl-6">Descuento: <i>{costTotal}</i> - <i className='text-red-500'>{discount}.00</i> </h3>}
                               
                               {Object.entries(loansdates).length === 0 ? undefined:<h3 className='pl-6'>Credito a DNI:<i className='text-red-500'>{loansdates.dni}</i></h3>}
 
