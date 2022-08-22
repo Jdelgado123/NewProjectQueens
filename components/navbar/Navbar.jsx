@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <Link href={"/seccion"}>
           <a href="#" className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">Zaffari's Boutique</span>
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white text-white">Zaffaris Boutique</span>
           </a>
         </Link>
         <button data-collapse-toggle="mobile-menu" type="button" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false" onClick={() => aea()}>

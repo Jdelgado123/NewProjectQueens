@@ -50,7 +50,7 @@ const Login = () => {
   return (
     <div className="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700 place-content-center">
       <form className='space-y-6 place-content-center' onSubmit={handleSubmit}>
-        <h5 className="text-xl font-medium text-gray-900 dark:text-white">Zaffari's Boutique</h5>
+        <h5 className="text-xl font-medium text-gray-900 dark:text-white">Zaffaris Boutique</h5>
         <div>
           <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Usuario</label>
           <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="example" onChange={handleChange} required />
