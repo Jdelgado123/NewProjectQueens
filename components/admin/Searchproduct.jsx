@@ -54,6 +54,13 @@ const Searchproduct = () => {
 
 
     }
+
+    const calculateOffer = (x) =>{
+        const price = document.querySelector('#price').value
+        const priceoffer = price - (price*x)
+        setOffer(priceoffer)
+    }
+
     const getEditProduct = async () => {
         const name = document.querySelector('#name').value
         const stock = document.querySelector('#stock').value
@@ -117,9 +124,9 @@ const Searchproduct = () => {
                                                 <label htmlFor="expiry" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Aplicar Oferta</label>
                                                 <div className="flex items-center pb-5 pt-2">
                                                     <div className="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
-                                                        <button type="button" className="rounded-l inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => setOffer('20%')} >20%</button>
-                                                        <button type="button" className=" inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => setOffer('30%')} >30%</button>
-                                                        <button type="button" className=" rounded-r inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => setOffer('50%')}>50%</button>
+                                                        <button type="button" className="rounded-l inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() =>calculateOffer(0.2)} >20%</button>
+                                                        <button type="button" className=" inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => calculateOffer(0.3)} >30%</button>
+                                                        <button type="button" className=" rounded-r inline-block px-6 py-2.5 bg-yellow-300 text-black font-medium text-xs leading-tight uppercase hover:bg-yellow-500 focus:bg-red-600 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out" onClick={() => calculateOffer(0.5)}>50%</button>
                                                     </div>
                                                 </div>
 

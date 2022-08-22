@@ -6,7 +6,12 @@ import Layout from '../../components/Layout'
 import { valorLocalhost } from '../../utils/globals'
 
 const categories = ({ products }) => {
+<<<<<<< HEAD
   const [src,setSrc] = useState('')
+=======
+
+  const [src,setSrc] = useState('/a')
+>>>>>>> 1ee18efeec5cfbb1b6a5fdfed9ee428577ce4ff8
   const [idpr,setIdpr] = useState(0)
 
   const togleModalImages = (id,image) => {

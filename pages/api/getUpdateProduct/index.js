@@ -21,7 +21,7 @@ const getUpdate = async(req,res)=>{
 const postUpdate = async(req,res)=>{
     const {id,name,stock,price,description,offer} = req.body
 
-    const [result] = await db.query('UPDATE products SET name=?, stock=?,price=?,description=? WHERE id_product=?',[name,stock,price,description,id])
+    const [result] = await db.query('UPDATE products SET name=?, stock=?,price=?,description=?,price_offer=? WHERE id_product=?',[name,stock,price,description,offer,id])
 
     return res.status(200).json(result)
 }

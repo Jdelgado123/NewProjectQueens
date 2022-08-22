@@ -91,7 +91,12 @@ function producDetails({ product, result }) {
 
             <div className="product-detail-desc">
               <div>
-                <p className="price">{product[0].currency == "USD" ? "$" : "S/."}{product[0].price}</p>
+                {product[0].price_offer>0
+                ?
+                <p className="price"><h1 className='line-through'>{product[0].currency == "USD" ? "$" : "S/."}{product[0].price}</h1><h1 className='flex text-green-400'>{product[0].currency == "USD" ? "$" : "S/."}{product[0].price_offer}</h1></p>
+                :
+                <p className="price">{product[0].currency == "USD" ? "$" : "S/."}{product[0].price}</p>}
+                
                 <div className="quantity">
                   <h3>Cantidad:</h3>
                   <p className="justify-between grid gap-4 grid-cols-3 items-center">

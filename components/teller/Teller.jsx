@@ -9,7 +9,7 @@ import { RiVisaFill } from 'react-icons/ri'
 import { GiPayMoney } from 'react-icons/gi'
 import { BiSearchAlt } from 'react-icons/bi'
 
-
+//{discount == 0 ? costTotal : costTotal - discount}
 const Teller = () => {
 
   const [dat, setDat] = useState([])
@@ -48,6 +48,7 @@ const Teller = () => {
     const { data } = await axios.post('/api/requires', { id: id })
     setFaa(data)
     setCostTotal(data[0].total_cost)
+    document.querySelector('#costTotal').value = data[0].total_cost
     togleModalx()
   }
 
@@ -59,8 +60,8 @@ const Teller = () => {
   }
 
   const readythepay = async (x) => {
-
-    const costPay = costTotal - discount
+    
+    const costPay = document.querySelector('#costTotal').value
 
     if (x == 'free'){
       costPay = 0
@@ -100,7 +101,9 @@ const Teller = () => {
   }
 
   const applyDiscount = () => {
-    setDiscount(document.querySelector('#discount').value)
+    const xx = document.querySelector('#discount').value
+    setDiscount(xx)
+    document.querySelector('#costTotal').value = costTotal-xx
   }
 
   const searchLoan = async () => {
@@ -111,7 +114,7 @@ const Teller = () => {
     if (data.length > 0) {
       document.querySelector('#loanName').value = data[0].name
     } else {
-      toast.error("Numero DNI no existente en la base e datos",{duration:1500})
+      toast.error("Numero DNI no existente en la base de datos",{duration:1500})
       document.querySelector('#loanName').value = ""
     }
   }
@@ -335,7 +338,7 @@ const Teller = () => {
                       <div className='flex p-2'>
                         <div className='absolute bottom-0 right-10 text-center grid grid-cols-2'>
                           <h3 className='text-3xl font-bold text-red-800'>TOTAL:</h3>
-                          <h3 className='text-3xl'>{discount == 0 ? costTotal : costTotal - discount}</h3>
+                          <input id='costTotal' className='text-1xl'/>
                         </div>
                       </div>
 
