@@ -7,7 +7,7 @@ import { valorLocalhost } from '../../utils/globals'
 
 const categories = ({ products }) => {
 
-  const [src,setSrc] = useState('/sssaaaaaa')
+  const [src,setSrc] = useState('/a')
   const [idpr,setIdpr] = useState(0)
 
   const togleModalImages = (id,image) => {

@@ -8,9 +8,9 @@ const Categorias = ({ categorias }) => {
 
         <div className='grid gap-3 md:gap-6 grid-cols-2 md:grid-cols-2 mx-auto container'>
 
-            {categorias.map((item) => (
+            {categorias.map((item,index) => (
                 
-                <Link href={`/categories/${item.name}`}>
+                <Link href={`/categories/${item.name}`} key={index}>
                     <button
                         type="button"
                         data-mdb-ripple="true"
