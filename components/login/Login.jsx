@@ -12,8 +12,8 @@ const Login = () => {
   const {permissio,setPermissio} = useStateContext()
   const router = useRouter()
   const [credentials, setCredentials] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
     remember: false,
   })
 

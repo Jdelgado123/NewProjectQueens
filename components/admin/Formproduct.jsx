@@ -152,6 +152,7 @@ const Formproduct = () => {
 
 
   return (
+    
     <div className='w-full max-w-xs'>
       <form id='formPost' onChange={preventEnter} className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-1" onSubmit={handleSubmit}>
 
