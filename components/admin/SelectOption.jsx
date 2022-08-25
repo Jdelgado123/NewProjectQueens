@@ -66,7 +66,7 @@ const SelectOption = () => {
                     <p className="mt-2 text-sm text-slate-500">Vea y cree reportes del mismo dia o semanales</p>
                 </div> 
                 </Link>  
-                <Link href={'/newuser'}>
+                <Link href={'/registernewpubli'}>
                 <div className="p-10 flex flex-col items-center text-center group  md:lg:xl:border-b hover:bg-slate-50 cursor-pointer">
                 <span className="p-5 rounded-full bg-teal-500 text-white shadow-lg shadow-teal-200"><svg
                         xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24"
@@ -74,8 +74,8 @@ const SelectOption = () => {
                         <path strokeLinecap="round" strokeLinejoin="round"
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                     </svg></span>
-                    <p className="text-xl font-medium text-slate-700 mt-3">Publicacion Nueva</p>
-                    <p className="mt-2 text-sm text-slate-500">Seccion para crear usuarios vip</p>
+                    <p className="text-xl font-medium text-slate-700 mt-3">Crear Nueva Publicación</p>
+                    <p className="mt-2 text-sm text-slate-500">Seccion para hacer nuevas publicaciones</p>
                 </div> 
                 </Link>
                 <Link href={'/registernewuser'}>

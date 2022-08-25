@@ -6,9 +6,9 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const tinyfy = require('tinify') 
 
-const compressimg = () => {
+const compressing = (x) => {
     tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
-    tinyfy.fromFile("gaa.jpg").toFile("optimized.jpg");
+    tinyfy.fromFile(`../../public/imagesServer2/${x}`).toFile(`../../public/imagesServer2/${x}`);
 
 }
 
@@ -44,7 +44,7 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     const sizesArray = JSON.parse(sizes)
 
     if(sizesArray === null){
-        const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
+        const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
         res.status(200).json(req.body)
     }else{
         const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
@@ -56,9 +56,22 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     
 })
 
+router.post('/newPublication',fileUpload,async(req,res)=>{
+    const {title,description} = req.body
+
+    const file = req.file.filename
+
+    console.log(req)
+
+    const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:file})
+
+    compressing(file)
+    
+})
+
 router.get('/compress',async(req,res)=>{
     
-    compressimg()
+    compressing()
     
 })
 

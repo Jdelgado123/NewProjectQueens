@@ -30,9 +30,10 @@ const postNewUser = async (req, res) => {
 
     try {
         const { name, password } = req.body
-        console.log(password)
-        let passHash = await bcrypt.hash(password, 8)
-        await db.query("INSERT INTO users SET ?", { username: name, password: passHash,state:'vip' });
+        
+        //let passHash = await bcrypt.hash(password, 8)
+        
+        await db.query("INSERT INTO users SET ?", { username: name, password: password,state:'vip' });
     } catch (error) {
         console.log(error);
     }

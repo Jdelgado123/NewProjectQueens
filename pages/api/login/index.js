@@ -22,11 +22,15 @@ const getCreedentials = async (req, res) => {
 
 const postCreedentials = async (req, res) => {
     const {username,password,remember} = req.body
-    const [result] = await db.query("SELECT * FROM users WHERE username=?",[username])
+    const [result] = await db.query("SELECT * FROM users WHERE username=? AND password=?",[username,password])
 
     let fa=result[0].password
-    console.log((await bcrypt.compare(password+'',fa+'')))
-    if(!(await bcrypt.compare(password,result[0].password))){
+    console.log(fa)
+
+    console.log(await bcrypt.hash('sss',8))
+
+    console.log((await bcrypt.compare('sss',fa)))
+    if(result.length == 0){
         res.status(200).json({
             alert:true,
             alertTitle:"Error",
