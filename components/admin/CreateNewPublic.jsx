@@ -9,11 +9,16 @@ function CreateNewPublic() {
 
     const title = document.querySelector('#title').value
     const description = document.querySelector('#description').value
-    const file = document.querySelector('#img').files
+    const files = document.querySelector('#img').files
 
+    if (files.length !=0) {
+      for(const file of files) {
+        fd.append('imagen',file)
+      }
+      
+    }
     fd.append('title',title),
     fd.append('description',description),
-    fd.append('file',file)
 
     fetch(`http://${valorLocalhost}:3000/newPublication`,{
       method:'POST',

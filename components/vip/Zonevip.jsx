@@ -1,14 +1,19 @@
 import React from 'react'
+import Image from 'next/image'
 
-function Zonevip() {
+function Zonevip({publications}) {
+
+    console.log(publications)
+
     return (
         <div className="my-10 px-6 mx-auto">
-            <div className="mb-14 text-gray-800 text-center md:text-left">
+
+            {publications.map((publi,index)=>(
+                <div className="mb-14 text-gray-800 text-center md:text-left" key={index}>
                 <div className="block rounded-lg shadow-lg bg-white">
                     <div className="flex flex-wrap items-center">
                         <div className="grow-0 shrink-0 basis-auto block lg:flex w-full lg:w-6/12 xl:w-4/12">
-                            <img src="https://w0.peakpx.com/wallpaper/499/107/HD-wallpaper-cleopatra-costume-model-people-beautiful-egyptian-sexy.jpg" alt="Trendy Pants and Shoes"
-                                className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
+                            <Image src={"/imagesServer2/"+publi.image} alt="...." height={1500} width={1500} className="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
                         </div>
                         <div className="grow-0 shrink-0 basis-auto w-full lg:w-6/12 xl:w-8/12">
                             <div className="px-6 py-12 md:px-12">
@@ -82,7 +87,12 @@ function Zonevip() {
                     </div>
                 </div>
             </div>
+            ))}
+            
+            
         </div>
+        
+        
     )
 }
 

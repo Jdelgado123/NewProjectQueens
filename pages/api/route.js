@@ -8,7 +8,7 @@ const tinyfy = require('tinify')
 
 const compressing = (x) => {
     tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
-    tinyfy.fromFile(`../../public/imagesServer2/${x}`).toFile(`../../public/imagesServer2/${x}`);
+    tinyfy.fromFile(path.join(__dirname, `../../public/imagesServer2/${x}`)).toFile(path.join(__dirname, `../../public/imagesServer2/${x}`));
 
 }
 
@@ -59,9 +59,7 @@ router.post('/images/post',fileUpload,async(req,res)=>{
 router.post('/newPublication',fileUpload,async(req,res)=>{
     const {title,description} = req.body
 
-    const file = req.file.filename
-
-    console.log(req)
+    const file = req.files[0].filename
 
     const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:file})
 
