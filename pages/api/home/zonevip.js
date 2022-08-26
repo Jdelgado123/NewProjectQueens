@@ -21,7 +21,7 @@ const getzonevip = async (req, res) => {
 const postzonevip = async (req,res) =>{
     
 
-    return res.status(200).json({aea:'tas en offertas post'})
+    return res.status(200).json({aea:'tas en ZoneVip post'})
 }
 
 export default handler;

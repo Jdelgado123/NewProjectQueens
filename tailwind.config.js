@@ -24,6 +24,28 @@ module.exports = {
     extend: {
       fontFamily:{
         'fuenterara':['Smooch', 'cursive']
+      },
+      keyframes: {
+        myanimation:{
+          from:{
+            transform:'translate(100%)'
+          },
+          to:{
+            transform:'translate(0%)'
+          }
+        },
+        imgresize:{
+          from:{
+            transform:'scale(0)'
+          },
+          to:{
+            transform:'scale(1)'
+          }
+        }
+      },
+      animation:{
+        'bounce-new':'myanimation .5s',
+        'img':'imgresize .3s'
       }
     },
   },
