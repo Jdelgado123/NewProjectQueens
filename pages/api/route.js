@@ -4,7 +4,8 @@ const multer = require('multer')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const app = express()
-const tinyfy = require('tinify') 
+const tinyfy = require('tinify')
+const db =require('../../config/db') 
 
 const compressing = (x) => {
     tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
@@ -12,9 +13,6 @@ const compressing = (x) => {
 
 }
 
-
-const db =require('../../config/db')
-const console = require('console')
 
 app.use(cookieParser())
 
@@ -39,7 +37,10 @@ router.post('/images/post',fileUpload,async(req,res)=>{
 
     barcode==""? barcodedata = 0 : barcodedata = barcode
 
-    ttt.map(file => {jsonname.push(file.filename)})
+    ttt.map(file => {
+        jsonname.push(file.filename)
+        compressing(file.filename)
+    })
 
     const sizesArray = JSON.parse(sizes)
 
