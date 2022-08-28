@@ -4,17 +4,15 @@ const multer = require('multer')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const app = express()
-const tinyfy = require('tinify') 
+const tinyfy = require('tinify')
+const db =require('../../config/db') 
 
-const compressimg = () => {
+const compressing = (x) => {
     tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
-    tinyfy.fromFile("gaa.jpg").toFile("optimized.jpg");
+    tinyfy.fromFile(path.join(__dirname, `../../public/imagesServer2/${x}`)).toFile(path.join(__dirname, `../../public/imagesServer2/${x}`));
 
 }
 
-
-const db =require('../../config/db')
-const console = require('console')
 
 app.use(cookieParser())
 
@@ -39,12 +37,15 @@ router.post('/images/post',fileUpload,async(req,res)=>{
 
     barcode==""? barcodedata = 0 : barcodedata = barcode
 
-    ttt.map(file => {jsonname.push(file.filename)})
+    ttt.map(file => {
+        jsonname.push(file.filename)
+        compressing(file.filename)
+    })
 
     const sizesArray = JSON.parse(sizes)
 
     if(sizesArray === null){
-        const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
+        const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
         res.status(200).json(req.body)
     }else{
         const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
@@ -56,9 +57,20 @@ router.post('/images/post',fileUpload,async(req,res)=>{
     
 })
 
+router.post('/newPublication',fileUpload,async(req,res)=>{
+    const {title,description} = req.body
+
+    const file = req.files[0].filename
+
+    const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:file})
+
+    compressing(file)
+    
+})
+
 router.get('/compress',async(req,res)=>{
     
-    compressimg()
+    compressing()
     
 })
 

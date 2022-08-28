@@ -1,6 +1,6 @@
 import db from "../../../config/db"
+const bcrypt = require("bcryptjs")
 var jwt = require('jsonwebtoken')
-import { setCookie } from 'cookies-next';
 
 
 export default async function handler(req, res) {
@@ -24,7 +24,13 @@ const postCreedentials = async (req, res) => {
     const {username,password,remember} = req.body
     const [result] = await db.query("SELECT * FROM users WHERE username=? AND password=?",[username,password])
 
-    if(result.length <= 0){
+    let fa=result[0].password
+    console.log(fa)
+
+    console.log(await bcrypt.hash('sss',8))
+
+    console.log((await bcrypt.compare('sss',fa)))
+    if(result.length == 0){
         res.status(200).json({
             alert:true,
             alertTitle:"Error",

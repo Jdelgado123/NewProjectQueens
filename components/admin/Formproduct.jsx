@@ -9,23 +9,12 @@ import { valorLocalhost } from '../../utils/globals'
 
 const Formproduct = () => {
   const [categor, setCategor] = useState("")
-  const [subcate, setSubcate] = useState("")
-  const [file, setFile] = useState(null)
-  const [aarray, setArray] = useState(null)
   const [currency, setCurrency] = useState("")
   const [tallass, setTallass] = useState(null)
   const [arraycategory, setArraycategory] = useState([])
 
   const tallas = []
   const SumatotalSize = 0
-  useEffect(() => {
-    async function fa() {
-      const { data } = await axios.get('/api/subcategories', { params: { id: categor } })
-      setArray(data)
-
-    }
-    fa()
-  }, [categor])
 
   const [product, setProduct] = useState({
     name: "",
@@ -73,7 +62,6 @@ const Formproduct = () => {
       fd.append('stock', stock),
       fd.append('barcode', product.barcode),
       fd.append('category', categor),
-      fd.append('subcategory', subcate),
       fd.append('location', product.location.toUpperCase()),
       fd.append('currency', currency)
 
@@ -164,6 +152,7 @@ const Formproduct = () => {
 
 
   return (
+    
     <div className='w-full max-w-xs'>
       <form id='formPost' onChange={preventEnter} className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-1" onSubmit={handleSubmit}>
 

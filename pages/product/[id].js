@@ -13,7 +13,6 @@ import { valorLocalhost } from "../../utils/globals"
 let count = 0
 function producDetails({ product, result }) {
   const [index, setIndex] = useState(0);
-  const [stocks, setStocks] = useState(0);
   const [iclick, setIclick] = useState(0);
 
   const { decQty, incQty, qty, onAdd, setQty } = useStateContext();
@@ -24,12 +23,10 @@ function producDetails({ product, result }) {
 
 
   useEffect(() => {
-    setStocks(product[0].stock)
     setQty(1)
   }, [])
 
   const changeStockbySize = (stock, value, i) => {
-    setStocks(stock)
     setIclick(i)
     product[0].sizename = value
   }
@@ -87,7 +84,11 @@ function producDetails({ product, result }) {
 
           </div>
           <div className='grid gap-1 md:gap-6 grid-cols-1 md:grid-cols-1 mx-auto container'>
+<<<<<<< HEAD
             <span className='self-center text-xl font-semibold text-center'>{product[0].name}</span>
+=======
+            <span className='self-center text-xl font-semibold text-center'>Zaffaris Boutique</span>
+>>>>>>> f9f01e591ea2521a87eae23c2d4dec1765b2a6e8
 
             <div className="product-detail-desc">
               <div>
