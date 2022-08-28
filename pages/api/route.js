@@ -47,7 +47,7 @@ router.post('/images/post',fileUpload,async(req,res)=>{
         const result = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
         res.status(200).json(req.body)
     }else{
-        const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode,name_img:JSON.stringify(jsonname),location,currency})
+        const [result] = await db.query('INSERT INTO products set ?',{id_category:category,name,description,price,stock,barcode:barcodedata,name_img:JSON.stringify(jsonname),location,currency})
         sizesArray.map(async(item)=>{
             const insertSize = await db.query('INSERT INTO size_product SET ?',{id_product:result.insertId,sizename:item.size_name,stock:item.size_stock})
         })

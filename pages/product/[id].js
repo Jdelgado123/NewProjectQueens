@@ -87,7 +87,7 @@ function producDetails({ product, result }) {
 
           </div>
           <div className='grid gap-1 md:gap-6 grid-cols-1 md:grid-cols-1 mx-auto container'>
-            <span className='self-center text-xl font-semibold text-center'>Zaffari's Boutique</span>
+            <span className='self-center text-xl font-semibold text-center'>{product[0].name}</span>
 
             <div className="product-detail-desc">
               <div>
