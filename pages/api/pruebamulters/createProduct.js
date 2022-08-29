@@ -1,23 +1,18 @@
-const express = require('express')
-const router = express.Router()
-const multer = require('multer')
+import db from "../../../config/db"
+import nextConnect from 'next-connect'
 const path = require('path')
-const cookieParser = require('cookie-parser')
-const app = express()
+import multer from "multer";
 const tinyfy = require('tinify')
-const db =require('../../config/db') 
+
+const direccionFolder = '../../../../public/imagesServer2/'
 
 const compressing = (x) => {
-    tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
-    tinyfy.fromFile(path.join(__dirname, `../../public/imagesServer2/${x}`)).toFile(path.join(__dirname, `../../public/imagesServer2/${x}`));
-
+  tinyfy.key = '5CkKrPYVVTxCb8nx7ybkvlsXPrxW8Qnk'
+  tinyfy.fromFile(path.join(__dirname, direccionFolder+x)).toFile(path.join(__dirname, direccionFolder+x));
 }
 
-
-app.use(cookieParser())
-
 const diskStorage = multer.diskStorage({
-    destination:path.join(__dirname, '../../public/imagesServer2'),
+    destination:path.join(__dirname, direccionFolder),
     filename:(req,file,cb)=>{
         cb(null,Date.now()+"-"+file.originalname)
     }
@@ -28,12 +23,27 @@ const fileUpload = multer({
 }).any('imagen',10)
 
 
-router.post('/images/post',fileUpload,async(req,res)=>{
+
+const apiRoute = nextConnect({
+    // Handle any other HTTP method
+    onNoMatch(req, res) {
+      res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
+    },
+  });
+  
+
+  apiRoute.use(fileUpload)
+
+  // Process a POST request
+  apiRoute.post(async(req, res) => {
+
     const {name,description,price,stock,barcode,category,location,currency,sizes} = req.body
 
     const jsonname = []
     const ttt = req.files
     let barcodedata
+
+    console.log(req.body)
 
     barcode==""? barcodedata = 0 : barcodedata = barcode
 
@@ -54,9 +64,12 @@ router.post('/images/post',fileUpload,async(req,res)=>{
         })
 
     }
-    
-})
+  });
+  
+  export default apiRoute;
 
-
-
-module.exports = router
+  export const config={
+    api:{
+        bodyParser : false
+    }
+  }

@@ -4,7 +4,6 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import { GiAmpleDress } from 'react-icons/gi'
 import { ImPlus } from 'react-icons/im'
-import { valorLocalhost } from '../../utils/globals'
 
 
 const Formproduct = () => {
@@ -46,33 +45,34 @@ const Formproduct = () => {
   const stateCurrency = () => {
     setCurrency(document.getElementById('currency').value)
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const fd = new FormData()
     const files = document.querySelector('#img').files
     const stock = document.querySelector('#stock').value
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+      onUploadProgress: (event) => {
+        console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
+      },
+    };
+
     if (files.length != 0) {
       for (const singlefile of files) {
         fd.append('imagen', singlefile)
       }
     }
     fd.append('name', product.name),
-      fd.append('description', product.description),
-      fd.append('price', product.price),
-      fd.append('stock', stock),
-      fd.append('barcode', product.barcode),
-      fd.append('category', categor),
-      fd.append('location', product.location.toUpperCase()),
-      fd.append('currency', currency)
-
+    fd.append('description', product.description),
+    fd.append('price', product.price),
+    fd.append('stock', stock),
+    fd.append('barcode', product.barcode),
+    fd.append('category', categor),
+    fd.append('location', product.location.toUpperCase()),
+    fd.append('currency', currency)
     fd.append('sizes', JSON.stringify(tallass))
 
-
-    fetch(`http://${valorLocalhost}:3000/images/post`, {
-      method: 'POST',
-      body: fd
-    }).then(res => res.text()).catch(err => console.error(err))
-
+    await axios.post('/api/gaa', fd, config)
 
     document.getElementById('name').value = null
     document.getElementById('description').value = null
@@ -97,7 +97,7 @@ const Formproduct = () => {
   const togleModal = () => {
     document.querySelector('#modal').classList.toggle('hidden')
   }
-  
+
   const togleModalCreateCategoria = () => {
     document.querySelector('#modalCategorias').classList.toggle('hidden')
   }
@@ -141,7 +141,7 @@ const Formproduct = () => {
 
 
 
-    const dataCreate = { name: category_name.value, descripcion:selectSeccion.value }
+    const dataCreate = { name: category_name.value, descripcion: selectSeccion.value }
 
     document.getElementById('selectSeccion').value = 'mujer'
     document.getElementById('category_name').value = null
@@ -152,7 +152,7 @@ const Formproduct = () => {
 
 
   return (
-    
+
     <div className='w-full max-w-xs'>
       <form id='formPost' onChange={preventEnter} className="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 grid gap-1" onSubmit={handleSubmit}>
 
