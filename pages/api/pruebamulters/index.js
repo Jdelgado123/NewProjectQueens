@@ -3,6 +3,13 @@ import nextConnect from 'next-connect'
 const path = require('path')
 import multer from "multer";
 const tinyfy = require('tinify')
+const cloudinary = require('cloudinary');
+
+cloudinary.config({
+  cloud_name:'da1ngu69j',
+  api_key:'399336699412577',
+  api_secret:'0BcUfrtnnBYidQuBRLWKw5YGMxs'
+})
 
 const direccionFolder = '../../../../public/imagesServer2/'
 
@@ -41,9 +48,13 @@ const apiRoute = nextConnect({
 
     const file = req.files[0].filename
 
-    compressing(file)
+    console.log(file)
 
-    const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:file})
+    console.log(req.files)
+
+    const resultcloudinary = await cloudinary.v2.uploader.upload(req.files[0].path)
+
+    const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:resultcloudinary.url})
     res.status(200).json({ data: 'success' });
   });
   
