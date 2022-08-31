@@ -21,7 +21,6 @@ function producDetails({ product, result }) {
 
   const images = JSON.parse(namei)
 
-
   useEffect(() => {
     setQty(1)
   }, [])
@@ -53,7 +52,7 @@ function producDetails({ product, result }) {
 
                 <div className="carousel-item active relative float-left w-full">
                   <Image
-                    src={"/imagesServer2/" + images[index]}
+                    src={images[index]}
                     width={400}
                     height={300}
                     alt="..."

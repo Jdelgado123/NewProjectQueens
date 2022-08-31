@@ -52,9 +52,6 @@ const Formproduct = () => {
     const stock = document.querySelector('#stock').value
     const config = {
       headers: { 'content-type': 'multipart/form-data' },
-      onUploadProgress: (event) => {
-        console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-      },
     };
 
     if (files.length != 0) {
@@ -72,7 +69,7 @@ const Formproduct = () => {
     fd.append('currency', currency)
     fd.append('sizes', JSON.stringify(tallass))
 
-    await axios.post('/api/gaa', fd, config)
+    await axios.post('/api/gaa', fd, config).then((res)=> console.log(res)).catch(err=>console.log(err))
 
     document.getElementById('name').value = null
     document.getElementById('description').value = null

@@ -4,6 +4,7 @@ const path = require('path')
 import multer from "multer";
 const tinyfy = require('tinify')
 const cloudinary = require('cloudinary');
+const fs = require('fs-extra')
 
 cloudinary.config({
   cloud_name:'da1ngu69j',
@@ -53,6 +54,9 @@ const apiRoute = nextConnect({
     console.log(req.files)
 
     const resultcloudinary = await cloudinary.v2.uploader.upload(req.files[0].path)
+
+    await fs.unlink(req.files[0].path)
+    console.log(resultcloudinary)
 
     const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:resultcloudinary.url})
     res.status(200).json({ data: 'success' });

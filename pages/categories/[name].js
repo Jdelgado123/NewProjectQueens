@@ -16,7 +16,7 @@ const categories = ({ products }) => {
 
     setIdpr(id)
 
-    setSrc("/imagesServer2/" + image)
+    setSrc(image)
   }
   const togleModalImagesx = () => {
     document.querySelector('#modalImages').classList.toggle('hidden')
@@ -31,7 +31,7 @@ const categories = ({ products }) => {
           <div key={index} className="max-w-sm bg-white shadow-xl">
 
             <div className='relative overflow-hidden'>
-              <Image id={"img" + index} src={"/imagesServer2/" + product.name_img.replace(/['"]+/g, '')} width={375} height={325} alt="product image" onClick={() => togleModalImages(product.id_product, product.name_img.replace(/['"]+/g, ''))} />
+              <Image id={"img" + index} src={product.name_img.replace(/['"]+/g,'')} width={375} height={325} alt="product image" onClick={() => togleModalImages(product.id_product, product.name_img.replace(/['"]+/g, ''))} />
               {(product.stock == 0) ? <div className='absolute bottom-0 -mr-12 mb-4 rounded-br-lg right-0 bg-red-500 border-solid border-1 -rotate-45 whitespace-nowrap px-4 text-sm md:text-base w-36 md:w-40 h-6 md:h-8 text-center text-white'>AGOTADO</div> : null}
             </div>
 
