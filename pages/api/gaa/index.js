@@ -6,68 +6,81 @@ const cloudinary = require('cloudinary');
 const fs = require('fs-extra')
 
 cloudinary.config({
-  cloud_name:'da1ngu69j',
-  api_key:'399336699412577',
-  api_secret:'0BcUfrtnnBYidQuBRLWKw5YGMxs'
+  cloud_name: 'da1ngu69j',
+  api_key: '399336699412577',
+  api_secret: '0BcUfrtnnBYidQuBRLWKw5YGMxs'
 })
 
-let json = []
 const direccionFolder = '../../../../public/imagesServer2/'
 
 const diskStorage = multer.diskStorage({
-    destination:path.join(__dirname, direccionFolder),
-    filename:(req,file,cb)=>{
-        cb(null,Date.now()+"-"+file.originalname)
-    }
+  destination: path.join(__dirname, direccionFolder),
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname)
+  }
 })
 
 const fileUpload = multer({
-    storage:diskStorage
-}).any('imagen',10)
+  storage: diskStorage
+}).any('imagen', 10)
 
 
 
 const apiRoute = nextConnect({
-    // Handle any other HTTP method
-    onNoMatch(req, res) {
-      res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
-    },
-  });
-  
+  // Handle any other HTTP method
+  onNoMatch(req, res) {
+    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
+  },
+});
 
-  apiRoute.use(fileUpload)
 
-  // Process a POST request
-  apiRoute.post(async(req, res) => {
+apiRoute.use(fileUpload)
 
-    const {name,description,price,stock,barcode,category,location,currency,sizes} = req.body
+// Process a POST request
+apiRoute.post(async (req, res) => {
 
-    const jsonname = []
-    const ttt = req.files
-    let barcodedata
+  const { name, description, price, stock, barcode, category, location, currency, sizes } = req.body
 
-    barcode==""? barcodedata = 0 : barcodedata = barcode
-    const sizesArray = JSON.parse(sizes)
+  const jsonname = []
+  const ttt = req.files
+  let barcodedata
 
-    aea()
+  barcode == "" ? barcodedata = 0 : barcodedata = barcode
+  const sizesArray = JSON.parse(sizes)
 
-    function aea () {
-      ttt.map(async(file)=>{
-        await cloudinary.v2.uploader.upload(file.path).then(res=>json.push(res.secure_url)).catch(err=>console.log(err)) 
-        await fs.unlink(file.path) 
-        console.log(json)      
-      })
-    }
-    
+  /*function aea() {
+    ttt.map(async (file) => {
+      await cloudinary.v2.uploader.upload(file.path).then(res => json.push(res.secure_url)).catch(err => console.log(err))
+      await fs.unlink(file.path)
+      console.log(json)
+    })
+  }*/
+
+  if (sizesArray === null) {
+    let json = []
+    ttt.map(async (file) => {
+      await cloudinary.v2.uploader.upload(file.path).then(res => json.push(res.secure_url)).catch(err => console.log(err))
+      await fs.unlink(file.path)
+      console.log(json)
+    })
     console.log(json)
-    
-    
-  });
-  
-  export default apiRoute;
+    const [result] = await db.query('INSERT INTO products set ?', { id_category: category, name, description, price, stock, barcode: barcodedata, name_img: JSON.stringify(json), location, currency })
+    res.status(200).json(req.body)
+  } else {
+    const [result] = await db.query('INSERT INTO products set ?', { id_category: category, name, description, price, stock, barcode: barcodedata, name_img: JSON.stringify(jsonname), location, currency })
+    sizesArray.map(async (item) => {
+      const insertSize = await db.query('INSERT INTO size_product SET ?', { id_product: result.insertId, sizename: item.size_name, stock: item.size_stock })
+    })
 
-  export const config={
-    api:{
-        bodyParser : false
-    }
   }
+
+
+});
+
+export default apiRoute;
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}

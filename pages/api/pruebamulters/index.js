@@ -47,16 +47,9 @@ const apiRoute = nextConnect({
 
     const {title,description} = req.body
 
-    const file = req.files[0].filename
-
-    console.log(file)
-
-    console.log(req.files)
-
     const resultcloudinary = await cloudinary.v2.uploader.upload(req.files[0].path)
 
     await fs.unlink(req.files[0].path)
-    console.log(resultcloudinary)
 
     const [result] = await db.query('INSERT INTO publications SET ?',{title,description,image:resultcloudinary.url})
     res.status(200).json({ data: 'success' });
