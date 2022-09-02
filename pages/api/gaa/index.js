@@ -48,22 +48,27 @@ apiRoute.post(async (req, res) => {
   barcode == "" ? barcodedata = 0 : barcodedata = barcode
   const sizesArray = JSON.parse(sizes)
 
-  /*function aea() {
-    ttt.map(async (file) => {
-      await cloudinary.v2.uploader.upload(file.path).then(res => json.push(res.secure_url)).catch(err => console.log(err))
+  const aea = (sss) => {
+    const json = []
+    sss.map(async (file) => {
+      const datacloudinary = await cloudinary.v2.uploader.upload(file.path)
+      json.push(datacloudinary.secure_url)
       await fs.unlink(file.path)
       console.log(json)
     })
-  }*/
+    return new Promise(resolve => {
+      setTimeout(()=>{
+        resolve(true)   
+      },2000)
+    }) 
+  }
 
-  if (sizesArray === null) {
-    let json = []
-    ttt.map(async (file) => {
-      await cloudinary.v2.uploader.upload(file.path).then(res => json.push(res.secure_url)).catch(err => console.log(err))
-      await fs.unlink(file.path)
-      console.log(json)
-    })
-    console.log(json)
+  aea(ttt).then(async(results) => {
+    console.log(results)
+    
+  })
+
+  /*if (sizesArray === null) {
     const [result] = await db.query('INSERT INTO products set ?', { id_category: category, name, description, price, stock, barcode: barcodedata, name_img: JSON.stringify(json), location, currency })
     res.status(200).json(req.body)
   } else {
@@ -72,7 +77,7 @@ apiRoute.post(async (req, res) => {
       const insertSize = await db.query('INSERT INTO size_product SET ?', { id_product: result.insertId, sizename: item.size_name, stock: item.size_stock })
     })
 
-  }
+  }*/
 
 
 });
