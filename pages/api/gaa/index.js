@@ -58,14 +58,23 @@ apiRoute.post(async (req, res) => {
     })
     return new Promise(resolve => {
       setTimeout(()=>{
-        resolve(true)   
-      },2000)
+        resolve(json)   
+      },5000)
     }) 
   }
 
   aea(ttt).then(async(results) => {
-    console.log(results)
-    
+    if (sizesArray === null) {
+      const [result] = await db.query('INSERT INTO products set ?', { id_category: category, name, description, price, stock, barcode: barcodedata, name_img: JSON.stringify(results), location, currency })
+      console.log(results)
+      res.status(200).json(req.body)
+    } else {
+      const [result] = await db.query('INSERT INTO products set ?', { id_category: category, name, description, price, stock, barcode: barcodedata, name_img: JSON.stringify(results), location, currency })
+      sizesArray.map(async (item) => {
+        const insertSize = await db.query('INSERT INTO size_product SET ?', { id_product: result.insertId, sizename: item.size_name, stock: item.size_stock })
+      })
+  
+    }
   })
 
   /*if (sizesArray === null) {
