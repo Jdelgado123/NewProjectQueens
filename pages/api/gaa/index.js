@@ -59,7 +59,7 @@ apiRoute.post(async (req, res) => {
     return new Promise(resolve => {
       setTimeout(()=>{
         resolve(json)   
-      },5000)
+      },4000)
     }) 
   }
 

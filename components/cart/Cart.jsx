@@ -49,7 +49,7 @@ const Cart = () => {
         <div className="product-container">
           {cartItems.length >= 1 && cartItems.map((item) => (
             <div className="product" key={item.id_product}>
-              <Image src={"/imagesServer2/"+JSON.parse(item.name_img)[0]} className="cart-product-image" width={375} height={290} alt="..." />
+              <Image src={JSON.parse(item.name_img)[0]} className="cart-product-image" width={375} height={290} alt="..." />
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
